@@ -1,0 +1,12 @@
+.myCalendarWrapper .rbcCalendar {
+  /* color: white; */
+  background-color: rgb(255, 255, 255);
+  font-family: sans-serif;
+  padding: 10px;
+  border-radius: 10px;
+}
+.myCalendarWrapper {
+  display: flex;
+  /* align-items: center; */
+  margin-top: 80px;
+}
