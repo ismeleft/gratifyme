@@ -1,14 +1,35 @@
+.diaryPage {
+  background-image: url("../public/images/book.jpeg");
+  height: 100vh;
+  background-size: cover;
+  /* background-position: center; */
+}
 .diaryLayout {
+  position: relative;
+  top: 100px;
   display: flex;
-  padding-top: 60px;
+  /* padding-top: 60px; */
   width: 90%;
   max-width: 1200px;
 }
-
+.diaryGuide {
+  position: absolute;
+  left: 150px;
+  top: 70px;
+}
+.diaryCalendar {
+  position: absolute;
+  right: 50px;
+}
 .editorWrapper {
   display: flex;
+  background-image: url("../public/images/book.jpeg");
+  background-size: cover;
+  height: 100vh;
 }
-
+.editorNav {
+  margin-bottom: 150px;
+}
 .headerLayout {
   display: flex;
 }

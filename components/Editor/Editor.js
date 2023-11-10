@@ -1,44 +1,76 @@
-import React from "react";
-import { $getRoot, $getSelection } from "lexical";
-import { useEffect } from "react";
+import React, { useEffect } from "react";
 import { LexicalComposer } from "@lexical/react/LexicalComposer";
-import { PlainTextPlugin } from "@lexical/react/LexicalPlainTextPlugin";
-import { ContentEditable } from "@lexical/react/LexicalContentEditable";
+import { RichTextPlugin } from "@lexical/react/LexicalRichTextPlugin";
 import { HistoryPlugin } from "@lexical/react/LexicalHistoryPlugin";
 import { OnChangePlugin } from "@lexical/react/LexicalOnChangePlugin";
 import { useLexicalComposerContext } from "@lexical/react/LexicalComposerContext";
 import LexicalErrorBoundary from "@lexical/react/LexicalErrorBoundary";
-import { MuiContentEditable, placeHolderSx } from "@/styles/style";
+import { MuiContentEditable, placeHolderSx } from "@/components/Editor/style";
 import { Box } from "@mui/material";
-import { mt } from "date-fns/locale";
-import Toolbar from "./ToolBar/toolbar";
+import Toolbar from "./ToolBar/editor.js";
+import lexicalEditorConfig from "./config";
+import { ListPlugin } from "@lexical/react/LexicalListPlugin";
+import { LinkPlugin } from "@lexical/react/LexicalLinkPlugin";
+import ImagesPlugin from "../Editor/plugin/ImagePlugin.js";
 import styles from "./Editor.module.css";
+import firebase from "@/utils/firebase.js";
+import { doc, getDoc, setDoc } from "firebase/firestore";
 
-const theme = {};
-
-function MyCustomAutoFocusPlugin() {
+// EditorInnerComponent 子组件
+function EditorInnerComponent({ date }) {
   const [editor] = useLexicalComposerContext();
 
   useEffect(() => {
-    // Focus the editor when the effect fires!
-    editor.focus();
-  }, [editor]);
+    async function loadContent() {
+      const docRef = doc(firebase.db, "diaryEntries", date);
+      const docSnap = await getDoc(docRef);
+
+      if (docSnap.exists()) {
+        const editorStateData = docSnap.data().editorState;
+        if (editorStateData) {
+          editor.update(() => {
+            const initialState =
+              typeof editorStateData === "string"
+                ? JSON.parse(editorStateData)
+                : editorStateData;
+            editor.setEditorState(editor.parseEditorState(initialState));
+          });
+        }
+      }
+    }
+
+    if (date) {
+      loadContent();
+    }
+  }, [editor, date]);
 
   return null;
 }
-function onError(error) {
-  console.error(error);
-}
 
-export default function Editor() {
-  const initialConfig = {
-    namespace: "MyEditor",
-    theme,
-    onError,
+// Editor 主组件
+export default function Editor({ date }) {
+  const [content, setContent] = React.useState("");
+
+  const saveToFirebase = async (currentContent) => {
+    try {
+      const serializedState = JSON.stringify(currentContent);
+      const docRef = doc(firebase.db, "diaryEntries", date);
+      await setDoc(docRef, { editorState: serializedState });
+      console.log("Document successfully written!");
+    } catch (error) {
+      console.error("Error writing document: ", error);
+    }
+  };
+
+  const handleEditorChange = (editorState) => {
+    editorState.read(() => {
+      const currentContent = editorState.toJSON();
+      setContent(currentContent);
+    });
   };
 
   return (
-    <LexicalComposer initialConfig={initialConfig}>
+    <LexicalComposer initialConfig={lexicalEditorConfig}>
       <Toolbar />
       <Box
         sx={{
@@ -46,17 +78,25 @@ export default function Editor() {
           background: "white",
           paddingTop: "16px",
           borderRadius: "0px 0px 10px 10px",
+          opacity: 0.8,
         }}
       >
-        <PlainTextPlugin
+        <RichTextPlugin
           contentEditable={<MuiContentEditable />}
-          placeholder={<Box sx={placeHolderSx}>Enter your text here</Box>}
+          placeholder={<Box sx={placeHolderSx}>Enter your text here...</Box>}
           ErrorBoundary={LexicalErrorBoundary}
         />
+        <OnChangePlugin onChange={handleEditorChange} />
         <HistoryPlugin />
-        <MyCustomAutoFocusPlugin />
+        <ListPlugin />
+        <LinkPlugin />
+        <ImagesPlugin captionsEnabled={false} />
+        {/* 渲染 EditorInnerComponent 并传递 date */}
+        {date && <EditorInnerComponent date={date} />}
       </Box>
-      <button className={styles.diarySubmit}>Submit</button>
+      <button className={styles.submit} onClick={() => saveToFirebase(content)}>
+        保存
+      </button>
     </LexicalComposer>
   );
 }

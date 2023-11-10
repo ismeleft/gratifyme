@@ -12,9 +12,15 @@ const diary = () => {
   return (
     <>
       <Nav />
-      <div className={styles.diaryLayout}>
-        <Diaryguide />
-        <MyCalendar />
+      <div className={styles.diaryPage}>
+        <div className={styles.diaryLayout}>
+          <div className={styles.diaryGuide}>
+            <Diaryguide />
+          </div>
+          <div className={styles.diaryCalendar}>
+            <MyCalendar />
+          </div>
+        </div>
       </div>
     </>
   );
