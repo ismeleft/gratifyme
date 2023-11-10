@@ -37,7 +37,7 @@ export default function CalendarDatePage() {
               up. <br />
               Heroic Moments: Record your heroes, who helped you? How would you
               like to thank the person? <br />
-              "Your" hero moment: Record the moment when you became a hero to
+              Your hero moment: Record the moment when you became a hero to
               others. Who did you help?
             </Typography>
           </Grid>
