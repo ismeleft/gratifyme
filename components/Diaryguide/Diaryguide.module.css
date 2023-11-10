@@ -1,0 +1,21 @@
+@import url("https://fonts.googleapis.com/css2?family=Courgette&family=Poppins:ital,wght@0,300;0,400;0,500;0,800;1,800&display=swap");
+.diaryGuide {
+  font-size: 18px;
+  color: white;
+  width: 70%;
+  margin-left: 40px;
+  margin-right: 30px;
+  /* padding: 20px; */
+  line-height: 40px;
+  height: 100vh;
+}
+.diaryGuideTitle {
+  font-family: "Courgette", cursive;
+  font-weight: 800;
+  font-size: 26px;
+}
+
+.diaryGuideText {
+  font-family: "Courgette", cursive;
+  font-size: 18 px;
+}

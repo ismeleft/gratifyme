@@ -1,0 +1,26 @@
+.header {
+  width: 35vw;
+  height: 52vh;
+  background-color: white;
+  margin-left: 50px;
+  padding-top: 60px;
+  padding-left: 30px;
+  opacity: 0.9;
+}
+
+.slogan {
+  margin-top: 15px;
+  line-height: 20px;
+  font-weight: 500;
+}
+
+.joinUs {
+  margin-top: 40px;
+}
+
+.line {
+  display: flex;
+  flex-direction: column;
+  margin-top: 20px;
+  width: 80%;
+}

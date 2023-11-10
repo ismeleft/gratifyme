@@ -1,0 +1,49 @@
+.navContainer {
+  display: flex;
+  /* background-color: #0f4c81; */
+  color: white;
+  height: 8vh;
+  width: 100%;
+  position: fixed;
+  justify-content: center;
+
+  /* border-bottom: 1px solid rgba(255, 255, 255, 0.3); */
+}
+
+.nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 90%;
+  max-width: 1200px;
+}
+
+.navItem {
+  display: flex;
+}
+.logo {
+  font-size: 25px;
+  font-weight: 600;
+  margin-left: 18px;
+  letter-spacing: 2px;
+  margin-right: 10px;
+}
+.logoText {
+  color: #ff6666;
+}
+
+.diary,
+.signin {
+  font-size: 18px;
+  margin: 15px 10px;
+  cursor: pointer;
+}
+.diary:hover,
+.signin:hover {
+  color: #ff6666;
+}
+
+.signin {
+  margin-right: 20px;
+  color: #666;
+}

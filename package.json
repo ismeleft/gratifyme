@@ -9,9 +9,23 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@emotion/react": "^11.11.1",
+    "@emotion/styled": "^11.11.0",
+    "@lexical/react": "^0.12.2",
+    "@mui/icons-material": "^5.14.16",
+    "@mui/lab": "^5.0.0-alpha.151",
+    "@mui/material": "^5.14.16",
+    "@mui/x-date-pickers": "^6.17.0",
+    "date-fns": "^2.30.0",
+    "dayjs": "^1.11.10",
+    "firebase": "^10.5.2",
+    "lexical": "^0.12.2",
+    "mdi-material-ui": "^7.7.0",
+    "next": "14.0.1",
     "react": "^18",
+    "react-big-calendar": "^1.8.5",
     "react-dom": "^18",
-    "next": "14.0.1"
+    "sass": "^1.69.5"
   },
   "devDependencies": {
     "eslint": "^8",
