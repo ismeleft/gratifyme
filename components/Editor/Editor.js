@@ -16,7 +16,7 @@ import styles from "./Editor.module.css";
 import firebase from "@/utils/firebase.js";
 import { doc, getDoc, setDoc } from "firebase/firestore";
 
-// EditorInnerComponent 子组件
+// 讀取Firestore的資料
 function EditorInnerComponent({ date }) {
   const [editor] = useLexicalComposerContext();
 
@@ -71,6 +71,9 @@ export default function Editor({ date }) {
 
   return (
     <LexicalComposer initialConfig={lexicalEditorConfig}>
+      <button className={styles.submit} onClick={() => saveToFirebase(content)}>
+        save
+      </button>
       <Toolbar />
       <Box
         sx={{
@@ -91,12 +94,8 @@ export default function Editor({ date }) {
         <ListPlugin />
         <LinkPlugin />
         <ImagesPlugin captionsEnabled={false} />
-        {/* 渲染 EditorInnerComponent 并传递 date */}
         {date && <EditorInnerComponent date={date} />}
       </Box>
-      <button className={styles.submit} onClick={() => saveToFirebase(content)}>
-        保存
-      </button>
     </LexicalComposer>
   );
 }

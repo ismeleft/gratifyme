@@ -1,0 +1,40 @@
+.container {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+    url("/images/form.jpeg");
+  background-size: cover;
+  width: 100vw;
+  height: 100vh;
+  line-height: 30px;
+  padding: 30px;
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+}
+
+.memberformBtn {
+  border: none;
+  border-radius: 5px;
+  background-color: rgba(255, 238, 55, 0.543);
+}
+
+.signupTitle,
+.loginTitle,
+.signupHint,
+.loginHint {
+  color: white;
+}
+
+.closeWindow {
+  position: absolute;
+  color: white;
+  font-size: 25px;
+  top: 30px;
+  right: 30px;
+  cursor: pointer;
+}

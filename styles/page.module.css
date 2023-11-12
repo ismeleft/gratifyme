@@ -25,7 +25,7 @@
   display: flex;
   background-image: url("../public/images/book.jpeg");
   background-size: cover;
-  height: 100vh;
+  /* height: 100vh; */
 }
 .editorNav {
   margin-bottom: 150px;
