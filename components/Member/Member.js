@@ -95,7 +95,7 @@ export default function Member() {
               Login
             </button>
             <p className={styles.loginHint} onClick={toggleForm}>
-              Don't have account? Sign up
+              Do not have account? Sign up
             </p>
           </form>
           <div onClick={handleClose} className={styles.closeWindow}>
