@@ -9,26 +9,7 @@ import { collection, query } from "firebase/firestore";
 const localizer = momentLocalizer(moment);
 
 const MyCalendar = ({ events }) => {
-  // const [markedDates, setMarkDates] = useState([]);
   const router = useRouter();
-
-  // useEffect(() => {
-  //   const fetchEntries = async () => {
-  //     const query = query(
-  //       collection(db, "diaryEntries"),
-  //       where("userId", "==", "your-user-id")
-  //     );
-  //     const querySnapshot = await getDocs(query);
-  //     const dates = querySnapshot.docs.map((doc) => {
-  //       return {
-  //         ...doc.data(),
-  //         date: doc.data().date.toDate(),
-  //       };
-  //     });
-  //     setMarkDates(dates);
-  //   };
-  //   fetchEntries();
-  // }, []);
 
   const handleEventClick = (event) => {
     // Handle the click on an existing event
@@ -37,11 +18,9 @@ const MyCalendar = ({ events }) => {
   };
 
   const handleSlotSelect = (slotInfo) => {
-    // Handle the click on a blank date slot
     const { start, end } = slotInfo;
     console.log("使用者點選了日期：", start, end);
-    // Navigate to the editor page with the selected date
-    // Assuming you have a route like '/editor/[date]'
+
     router.push(`/editor/${end.toISOString()}`);
   };
 
@@ -50,7 +29,6 @@ const MyCalendar = ({ events }) => {
       <Calendar
         className={styles.rbcCalendar}
         views={["month"]}
-        style={{ height: 400, width: 450 }}
         localizer={localizer}
         events={events}
         startAccessor="start"
@@ -58,12 +36,6 @@ const MyCalendar = ({ events }) => {
         selectable={true}
         onSelectEvent={handleEventClick}
         onSelectSlot={handleSlotSelect}
-        tileClassName={({ date, view }) => {
-          // 檢查是否為已編輯的日期
-          if (isEdited(date)) {
-            return "highlight";
-          }
-        }}
       />
     </div>
   );

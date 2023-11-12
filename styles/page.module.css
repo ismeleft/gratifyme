@@ -2,30 +2,44 @@
   background-image: url("../public/images/book.jpeg");
   height: 100vh;
   background-size: cover;
-  /* background-position: center; */
+  background-position: center center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 .diaryLayout {
-  position: relative;
-  top: 100px;
   display: flex;
-  /* padding-top: 60px; */
+  flex-direction: row;
+  justify-content: center;
+  margin-top: 80px;
+  display: flex;
   width: 90%;
   max-width: 1200px;
+  flex-wrap: wrap;
 }
-.diaryGuide {
+
+/* .diaryGuide {
+  width: 50%;
   position: absolute;
   left: 150px;
   top: 70px;
 }
 .diaryCalendar {
+  width: 100%;
   position: absolute;
-  right: 50px;
+  max-width: 600px;
+  right: -90px;
+} */
+
+.diaryGuide,
+.diaryCalendar {
+  max-width: 600px;
+  margin: 10px;
 }
 .editorWrapper {
   display: flex;
   background-image: url("../public/images/book.jpeg");
   background-size: cover;
-  /* height: 100vh; */
 }
 .editorNav {
   margin-bottom: 150px;
@@ -38,4 +52,20 @@
   background-image: url("../public/images/diarybook.jpeg");
   height: 100vh;
   background-size: cover;
+}
+
+@media screen and (max-width: 768px) {
+  .diaryPage {
+    background-image: none;
+  }
+  .diaryLayout {
+    flex-wrap: wrap;
+    flex-direction: column;
+  }
+  .diaryCalendar {
+    width: 100%;
+  }
+  .diaryGuide {
+    width: 100%;
+  }
 }

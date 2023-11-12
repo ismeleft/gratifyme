@@ -21,7 +21,9 @@ const Nav = () => {
         </div>
         <div className={styles.navItem}>
           <div className={styles.diary}>
-            <Link href="/diary">Diary</Link>
+            <Link className={styles.diaryLink} href="/diary">
+              Diary
+            </Link>
           </div>
           <div className={styles.signin} onClick={handleSignupLoginClick}>
             SignUp/Login
