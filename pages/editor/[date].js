@@ -1,4 +1,3 @@
-// pages/calendar/[date].js
 import { useRouter } from "next/router";
 import React from "react";
 import Editor from "../../components/Editor/Editor";
@@ -41,7 +40,7 @@ export default function CalendarDatePage() {
               others. Who did you help?
             </Typography>
           </Grid>
-          <Grid item xs={4.5} sx={{ mt: 20, ml: 2 }}>
+          <Grid item xs={4.5} sx={{ mt: 10, ml: 2 }}>
             <Editor date={date} />
           </Grid>
         </Grid>

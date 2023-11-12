@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Calendar, momentLocalizer } from "react-big-calendar";
 import moment from "moment";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 import styles from "./Calendar.module.css";
 import { useRouter } from "next/router";
+import { collection, query } from "firebase/firestore";
 
 const localizer = momentLocalizer(moment);
 
@@ -17,11 +18,9 @@ const MyCalendar = ({ events }) => {
   };
 
   const handleSlotSelect = (slotInfo) => {
-    // Handle the click on a blank date slot
     const { start, end } = slotInfo;
     console.log("使用者點選了日期：", start, end);
-    // Navigate to the editor page with the selected date
-    // Assuming you have a route like '/editor/[date]'
+
     router.push(`/editor/${end.toISOString()}`);
   };
 
@@ -30,7 +29,6 @@ const MyCalendar = ({ events }) => {
       <Calendar
         className={styles.rbcCalendar}
         views={["month"]}
-        style={{ height: 400, width: 450 }}
         localizer={localizer}
         events={events}
         startAccessor="start"

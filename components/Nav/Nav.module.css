@@ -38,7 +38,7 @@
   margin: 15px 10px;
   cursor: pointer;
 }
-.diary:hover,
+.diaryLink:hover,
 .signin:hover {
   color: #ff6666;
 }

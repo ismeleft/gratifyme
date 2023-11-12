@@ -4,10 +4,8 @@
   color: white;
   width: 70%;
   margin-left: 40px;
-  margin-right: 30px;
-  /* padding: 20px; */
+
   line-height: 40px;
-  height: 100vh;
 }
 .diaryGuideTitle {
   font-family: "Courgette", cursive;

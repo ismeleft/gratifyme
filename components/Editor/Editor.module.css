@@ -1,8 +1,9 @@
 .submit {
-  margin-top: 20px;
+  margin: 10px 0px;
   border-radius: 10px;
-  border: solid 1px #666;
-  color: #666;
+  border: none;
+  color: #fff;
+  background-color: rgb(98, 146, 98);
 }
 .editor-text-bold {
   font-weight: bold;
