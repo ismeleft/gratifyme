@@ -14,7 +14,7 @@ import { LinkPlugin } from "@lexical/react/LexicalLinkPlugin";
 import ImagesPlugin from "../Editor/plugin/ImagePlugin.js";
 import styles from "./Editor.module.css";
 import firebase from "@/utils/firebase.js";
-import { getAuth } from "firebase/auth";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { doc, getDoc, setDoc, collection } from "firebase/firestore";
 import { useRouter } from "next/router.js";
 
