@@ -33,13 +33,16 @@
 }
 
 .diary,
-.signin {
+.signin,
+.logout {
+  color: #666;
   font-size: 18px;
   margin: 15px 10px;
   cursor: pointer;
 }
 .diaryLink:hover,
-.signin:hover {
+.signin:hover,
+.logout:hover {
   color: #ff6666;
 }
 

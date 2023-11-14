@@ -1,7 +1,16 @@
 import { useForm } from "react-hook-form";
 import { useState } from "react";
-import styles from "../Member/Member.module.css";
 import { useRouter } from "next/router";
+import styles from "../Member/Member.module.css";
+import Image from "next/image";
+import firebase from "@/utils/firebase";
+import {
+  getAuth,
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  GoogleAuthProvider,
+  signInWithPopup,
+} from "firebase/auth";
 
 export default function Member() {
   const router = useRouter();
@@ -21,19 +30,64 @@ export default function Member() {
   const toggleForm = () => {
     setShowLogin(!showLogin);
   };
-  const onSubmit = (data) => console.log(data);
+  const onSubmit = (data) => {
+    const { email, password } = data;
+    if (showLogin) {
+      signInWithEmailAndPassword(firebase.auth, email, password)
+        .then((userCredential) => {
+          router.push("/");
+          console.log("Login success:", userCredential);
+        })
+        .catch((error) => {
+          console.error("Login error:", error);
+          alert(error);
+        });
+    } else {
+      createUserWithEmailAndPassword(firebase.auth, email, password)
+        .then((userCredential) => {
+          console.log("Register success:", userCredential);
+          alert("Sign in success, please login now!");
+        })
+        .catch((error) => {
+          console.error("Register error:", error);
+          alert(error);
+        });
+    }
+  };
 
-  console.log(watch("name")); // watch input value by passing the name of it
+  const handleGoogle = async (e) => {
+    e.preventDefault();
+    const provider = new GoogleAuthProvider();
+    try {
+      await signInWithPopup(firebase.auth, provider);
+      router.push("/");
+    } catch (error) {
+      alert(error);
+    }
+  };
 
   return (
     <div className={styles.container}>
+      <h1 className={styles.memberpageTitle}>
+        Login and enjoy the diary journey!
+      </h1>
       {!showLogin && (
         <div className={styles.signupContainer}>
           <form onSubmit={handleSubmit(onSubmit)}>
             <h1 className={styles.signupTitle}>Create your account</h1>
-            <span className={styles.signupHint}>
+            <button className={styles.googleButton} onClick={handleGoogle}>
+              <Image
+                className={styles.googleImage}
+                src="/images/google.png"
+                alt="google-button"
+                width={20}
+                height={20}
+              ></Image>
+              Sign in with Google
+            </button>
+            <div className={styles.signupHint}>
               or use your email for registration
-            </span>
+            </div>
             <br />
             <input
               type="text"
@@ -52,7 +106,7 @@ export default function Member() {
             <input
               type="password"
               placeholder="password"
-              {...register("password", { required: true })}
+              {...register("password", { required: true, minLength: 6 })}
             />
             <br />
             {errors.name && <div>Name is required.</div>}
@@ -74,13 +128,23 @@ export default function Member() {
         <div className={styles.loginContainer}>
           <form onSubmit={handleSubmit(onSubmit)}>
             <h1 className={styles.loginTitle}>Login your account</h1>
+            <button className={styles.googleButton} onClick={handleGoogle}>
+              <Image
+                className={styles.googleImage}
+                src="/images/google.png"
+                alt="google-button"
+                width={20}
+                height={20}
+              ></Image>
+              Continue in with Google
+            </button>
             <span className={styles.loginHint}>or use your account</span>
             <br />
             <input
               type="email"
               placeholder="email"
               defaultValue=""
-              {...register("email", { required: true })}
+              {...register("email", { required: true, minLength: 6 })}
             />
             <br />
             <input
