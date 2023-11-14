@@ -20,7 +20,7 @@ const Diary = () => {
   }, [router, auth]);
 
   return (
-    <>
+    <div className={styles.diaryWrapper}>
       <Nav />
       <div className={styles.diaryPage}>
         <div className={styles.diaryLayout}>
@@ -32,7 +32,7 @@ const Diary = () => {
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

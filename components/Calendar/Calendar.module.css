@@ -1,8 +1,12 @@
 .myCalendarWrapper {
   padding: 10px;
-  width: 100%;
-  max-width: 600px;
-  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+}
+
+.rbcCalendar {
+  width: 25vw;
+  height: 50vh;
 }
 
 .editedDate::after {
@@ -14,14 +18,16 @@
   background-size: cover;
 }
 
-@media only screen and (max-width: 768px) {
-  .myCalendarWrapper {
-    width: 100%;
-    padding: 5px;
+@media only screen and (max-width: 1200px) {
+  .rbcCalendar {
+    width: 35vw;
+    height: 50vh;
   }
 }
 
-.rbcCalendar {
-  width: 100%;
-  height: 60vh;
+@media only screen and (max-width: 768px) {
+  .rbcCalendar {
+    width: 80vw;
+    height: 50vh;
+  }
 }
