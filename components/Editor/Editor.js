@@ -19,11 +19,8 @@ import { doc, getDoc, setDoc, collection } from "firebase/firestore";
 import { useRouter } from "next/router.js";
 
 // 讀取Firestore的資料
-function EditorInnerComponent({ date }) {
+function EditorInnerComponent({ date, uid }) {
   const [editor] = useLexicalComposerContext();
-  const auth = getAuth();
-  const user = auth.currentUser;
-  const uid = user.uid;
 
   useEffect(() => {
     async function loadContent() {
@@ -56,18 +53,38 @@ function EditorInnerComponent({ date }) {
 export default function Editor({ date }) {
   const router = useRouter();
   const [content, setContent] = useState("");
-  const auth = getAuth();
-  const user = auth.currentUser;
-  const uid = user.uid;
+  const [uid, setUid] = useState(null);
 
+  useEffect(() => {
+    const auth = getAuth();
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      if (user) {
+        setUid(user.uid);
+      } else {
+        setUid(null);
+      }
+    });
+
+    return () => unsubscribe();
+  }, []);
+
+  // 保存内容到Firebase
   const saveToFirebase = async (currentContent) => {
-    try {
-      const serializedState = JSON.stringify(currentContent);
-      const userDiaryRef = doc(firebase.db, "users", uid, "diaryEntries", date);
-      await setDoc(userDiaryRef, { editorState: serializedState });
-      console.log("Document successfully written!");
-    } catch (error) {
-      console.error("Error writing document: ", error);
+    if (uid && date) {
+      try {
+        const serializedState = JSON.stringify(currentContent);
+        const userDiaryRef = doc(
+          firebase.db,
+          "users",
+          uid,
+          "diaryEntries",
+          date
+        );
+        await setDoc(userDiaryRef, { editorState: serializedState });
+        console.log("Document successfully written!");
+      } catch (error) {
+        console.error("Error writing document:", error);
+      }
     }
   };
 
@@ -81,7 +98,7 @@ export default function Editor({ date }) {
   return (
     <LexicalComposer initialConfig={lexicalEditorConfig}>
       <button className={styles.submit} onClick={() => saveToFirebase(content)}>
-        save
+        Save
       </button>
       <Toolbar />
       <Box
@@ -103,7 +120,7 @@ export default function Editor({ date }) {
         <ListPlugin />
         <LinkPlugin />
         <ImagesPlugin captionsEnabled={false} />
-        {date && <EditorInnerComponent date={date} />}
+        {uid && date && <EditorInnerComponent date={date} uid={uid} />}
       </Box>
     </LexicalComposer>
   );
