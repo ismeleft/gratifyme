@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { LexicalComposer } from "@lexical/react/LexicalComposer";
 import { RichTextPlugin } from "@lexical/react/LexicalRichTextPlugin";
 import { HistoryPlugin } from "@lexical/react/LexicalHistoryPlugin";
@@ -14,16 +14,21 @@ import { LinkPlugin } from "@lexical/react/LexicalLinkPlugin";
 import ImagesPlugin from "../Editor/plugin/ImagePlugin.js";
 import styles from "./Editor.module.css";
 import firebase from "@/utils/firebase.js";
-import { doc, getDoc, setDoc } from "firebase/firestore";
+import { getAuth } from "firebase/auth";
+import { doc, getDoc, setDoc, collection } from "firebase/firestore";
+import { useRouter } from "next/router.js";
 
 // 讀取Firestore的資料
 function EditorInnerComponent({ date }) {
   const [editor] = useLexicalComposerContext();
+  const auth = getAuth();
+  const user = auth.currentUser;
+  const uid = user.uid;
 
   useEffect(() => {
     async function loadContent() {
-      const docRef = doc(firebase.db, "diaryEntries", date);
-      const docSnap = await getDoc(docRef);
+      const userDiaryRef = doc(firebase.db, "users", uid, "diaryEntries", date);
+      const docSnap = await getDoc(userDiaryRef);
 
       if (docSnap.exists()) {
         const editorStateData = docSnap.data().editorState;
@@ -42,20 +47,24 @@ function EditorInnerComponent({ date }) {
     if (date) {
       loadContent();
     }
-  }, [editor, date]);
+  }, [editor, date, uid]);
 
   return null;
 }
 
 // Editor 主组件
 export default function Editor({ date }) {
-  const [content, setContent] = React.useState("");
+  const router = useRouter();
+  const [content, setContent] = useState("");
+  const auth = getAuth();
+  const user = auth.currentUser;
+  const uid = user.uid;
 
   const saveToFirebase = async (currentContent) => {
     try {
       const serializedState = JSON.stringify(currentContent);
-      const docRef = doc(firebase.db, "diaryEntries", date);
-      await setDoc(docRef, { editorState: serializedState });
+      const userDiaryRef = doc(firebase.db, "users", uid, "diaryEntries", date);
+      await setDoc(userDiaryRef, { editorState: serializedState });
       console.log("Document successfully written!");
     } catch (error) {
       console.error("Error writing document: ", error);

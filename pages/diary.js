@@ -1,10 +1,24 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useRouter } from "next/router";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
 import Nav from "../components/Nav/Nav";
 import MyCalendar from "../components/Calendar/Calendar";
 import Diaryguide from "@/components/Diaryguide/Diaryguide";
 import styles from "../styles/page.module.css";
 
-const diary = () => {
+const Diary = () => {
+  const router = useRouter();
+  const auth = getAuth();
+
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      if (!user) {
+        router.push("/");
+      }
+    });
+    return () => unsubscribe();
+  }, [router, auth]);
+
   return (
     <>
       <Nav />
@@ -22,4 +36,4 @@ const diary = () => {
   );
 };
 
-export default diary;
+export default Diary;
