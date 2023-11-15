@@ -1,4 +1,10 @@
 import React, { useEffect, useState } from "react";
+import styles from "./Editor.module.css";
+import firebase from "@/utils/firebase.js";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { doc, getDoc, setDoc, collection, deleteDoc } from "firebase/firestore";
+import { useRouter } from "next/router.js";
+
 import { LexicalComposer } from "@lexical/react/LexicalComposer";
 import { RichTextPlugin } from "@lexical/react/LexicalRichTextPlugin";
 import { HistoryPlugin } from "@lexical/react/LexicalHistoryPlugin";
@@ -12,11 +18,6 @@ import lexicalEditorConfig from "./config";
 import { ListPlugin } from "@lexical/react/LexicalListPlugin";
 import { LinkPlugin } from "@lexical/react/LexicalLinkPlugin";
 import ImagesPlugin from "../Editor/plugin/ImagePlugin.js";
-import styles from "./Editor.module.css";
-import firebase from "@/utils/firebase.js";
-import { getAuth, onAuthStateChanged } from "firebase/auth";
-import { doc, getDoc, setDoc, collection } from "firebase/firestore";
-import { useRouter } from "next/router.js";
 
 // 讀取Firestore的資料
 function EditorInnerComponent({ date, uid }) {
@@ -88,6 +89,30 @@ export default function Editor({ date }) {
     }
   };
 
+  //刪除內容
+  const deleteToFirebase = async (currentContent) => {
+    if (uid && date) {
+      try {
+        const serializedState = JSON.stringify(currentContent);
+        const userDiaryRef = doc(
+          firebase.db,
+          "users",
+          uid,
+          "diaryEntries",
+          date
+        );
+        await deleteDoc(userDiaryRef, { editorState: serializedState });
+        console.log("Document successfully delete!");
+        setContent("");
+        editor.update(() => {
+          editor.clear(); // 清空编辑器
+        });
+      } catch (error) {
+        console.error(error);
+      }
+    }
+  };
+
   const handleEditorChange = (editorState) => {
     editorState.read(() => {
       const currentContent = editorState.toJSON();
@@ -97,8 +122,17 @@ export default function Editor({ date }) {
 
   return (
     <LexicalComposer initialConfig={lexicalEditorConfig}>
-      <button className={styles.submit} onClick={() => saveToFirebase(content)}>
+      <button
+        className={styles.addSubmit}
+        onClick={() => saveToFirebase(content)}
+      >
         Save
+      </button>
+      <button
+        className={styles.deleteSubmit}
+        onClick={() => deleteToFirebase(content)}
+      >
+        Delete
       </button>
       <Toolbar />
       <Box

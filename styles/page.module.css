@@ -54,6 +54,7 @@
   }
   .diaryPage {
     background-image: none;
+    background-color: rgb(241, 241, 241);
   }
   .diaryLayout {
     flex-wrap: wrap;
