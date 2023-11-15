@@ -1,11 +1,8 @@
 .header {
-  width: 35vw;
-  height: 52vh;
-  background-color: white;
+  width: 500px;
+  background-color: rgba(255, 255, 255, 0.9);
   margin-left: 50px;
-  padding-top: 60px;
-  padding-left: 30px;
-  opacity: 0.9;
+  padding: 70px 50px 40px 50px;
 }
 
 .slogan {
@@ -23,4 +20,12 @@
   flex-direction: column;
   margin-top: 20px;
   width: 80%;
+}
+@media screen and (max-width: 768px) {
+  .header {
+    margin-left: 0px;
+    height: 100vh;
+    padding: 100px 50px;
+    background-color: rgba(255, 255, 255, 0.7);
+  }
 }
