@@ -1,9 +1,16 @@
-.submit {
-  margin: 10px 0px;
+.addSubmit {
+  margin: 10px 5px;
   border-radius: 10px;
   border: none;
   color: #fff;
   background-color: rgb(98, 146, 98);
+}
+.deleteSubmit {
+  margin: 10px 0px;
+  border-radius: 10px;
+  border: none;
+  color: #fff;
+  background-color: rgb(192, 103, 103);
 }
 .editor-text-bold {
   font-weight: bold;

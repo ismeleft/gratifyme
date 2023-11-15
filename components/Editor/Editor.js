@@ -1,4 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
+import styles from "./Editor.module.css";
+import firebase from "@/utils/firebase.js";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { doc, getDoc, setDoc, deleteDoc } from "firebase/firestore";
+import { useRouter } from "next/router.js";
+
 import { LexicalComposer } from "@lexical/react/LexicalComposer";
 import { RichTextPlugin } from "@lexical/react/LexicalRichTextPlugin";
 import { HistoryPlugin } from "@lexical/react/LexicalHistoryPlugin";
@@ -12,17 +18,17 @@ import lexicalEditorConfig from "./config";
 import { ListPlugin } from "@lexical/react/LexicalListPlugin";
 import { LinkPlugin } from "@lexical/react/LexicalLinkPlugin";
 import ImagesPlugin from "../Editor/plugin/ImagePlugin.js";
-import styles from "./Editor.module.css";
-import firebase from "@/utils/firebase.js";
-import { getAuth, onAuthStateChanged } from "firebase/auth";
-import { doc, getDoc, setDoc, collection } from "firebase/firestore";
-import { useRouter } from "next/router.js";
 
 // 讀取Firestore的資料
-function EditorInnerComponent({ date, uid }) {
+function EditorInnerComponent({ date, uid, onEditorReady }) {
   const [editor] = useLexicalComposerContext();
 
   useEffect(() => {
+    if (editor) {
+      // 當 editor 實例準備好後，通過 callback 傳遞給父組件
+      onEditorReady(editor);
+    }
+
     async function loadContent() {
       const userDiaryRef = doc(firebase.db, "users", uid, "diaryEntries", date);
       const docSnap = await getDoc(userDiaryRef);
@@ -41,19 +47,22 @@ function EditorInnerComponent({ date, uid }) {
       }
     }
 
-    if (date) {
+    if (uid && date) {
       loadContent();
     }
-  }, [editor, date, uid]);
+  }, [editor, date, uid, onEditorReady]);
 
-  return null;
+  // ...其他邏輯
+
+  return null; // 這裡不需要渲染任何東西
 }
 
-// Editor 主组件
+// Editor 主組件
 export default function Editor({ date }) {
   const router = useRouter();
   const [content, setContent] = useState("");
   const [uid, setUid] = useState(null);
+  const [editorInstance, setEditorInstance] = useState(null);
 
   useEffect(() => {
     const auth = getAuth();
@@ -66,6 +75,10 @@ export default function Editor({ date }) {
     });
 
     return () => unsubscribe();
+  }, []);
+
+  const handleEditorReady = useCallback((editor) => {
+    setEditorInstance(editor);
   }, []);
 
   // 保存内容到Firebase
@@ -81,9 +94,26 @@ export default function Editor({ date }) {
           date
         );
         await setDoc(userDiaryRef, { editorState: serializedState });
-        console.log("Document successfully written!");
+        window.location.reload();
+        alert("save successfully!");
       } catch (error) {
         console.error("Error writing document:", error);
+      }
+    }
+  };
+
+  // 刪除內容並在刪除前顯示確認對話框
+  const deleteToFirebase = async () => {
+    if (uid && date) {
+      // 顯示確認對話框
+      if (window.confirm("Are you sure you want to delete？")) {
+        try {
+          await deleteDoc(doc(firebase.db, "users", uid, "diaryEntries", date));
+          console.log("Document successfully deleted!");
+          window.location.reload();
+        } catch (error) {
+          console.error("Error deleting document:", error);
+        }
       }
     }
   };
@@ -97,8 +127,17 @@ export default function Editor({ date }) {
 
   return (
     <LexicalComposer initialConfig={lexicalEditorConfig}>
-      <button className={styles.submit} onClick={() => saveToFirebase(content)}>
+      <button
+        className={styles.addSubmit}
+        onClick={() => saveToFirebase(content)}
+      >
         Save
+      </button>
+      <button
+        className={styles.deleteSubmit}
+        onClick={() => deleteToFirebase(content)}
+      >
+        Delete
       </button>
       <Toolbar />
       <Box
@@ -120,7 +159,13 @@ export default function Editor({ date }) {
         <ListPlugin />
         <LinkPlugin />
         <ImagesPlugin captionsEnabled={false} />
-        {uid && date && <EditorInnerComponent date={date} uid={uid} />}
+        {uid && date && (
+          <EditorInnerComponent
+            date={date}
+            uid={uid}
+            onEditorReady={handleEditorReady}
+          />
+        )}
       </Box>
     </LexicalComposer>
   );
