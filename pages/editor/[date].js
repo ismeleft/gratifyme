@@ -20,9 +20,16 @@ export default function CalendarDatePage() {
         <CssBaseline />
         <Grid
           container
-          sx={{ minHeight: "100vh", maxWidth: "1200px", width: "90%" }}
+          sx={{
+            minHeight: "100vh",
+            maxWidth: "1200px",
+            display: "flex",
+            justifyContent: "space-around",
+            alignItems: "center",
+            flexWrap: "wrap",
+          }}
         >
-          <Grid item xs={5} sx={{ padding: "3em", ml: 20, mt: 10 }}>
+          <Grid item xs={5} sx={{ mt: 10 }}>
             <Typography variant="p" sx={{ fontSize: "30px" }}>
               Gratitude journal
             </Typography>

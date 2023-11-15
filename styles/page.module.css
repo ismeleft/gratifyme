@@ -34,9 +34,11 @@
 
 /* editor page */
 .editorWrapper {
-  display: flex;
   background-image: url("../public/images/book.jpeg");
-  background-size: cover;
+  background-position: center;
+  background-size: 150% 130%;
+  display: flex;
+  justify-content: center;
 }
 .editorNav {
   margin-bottom: 150px;
