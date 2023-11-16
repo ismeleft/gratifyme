@@ -52,9 +52,7 @@ function EditorInnerComponent({ date, uid, onEditorReady }) {
     }
   }, [editor, date, uid, onEditorReady]);
 
-  // ...其他邏輯
-
-  return null; // 這裡不需要渲染任何東西
+  return null;
 }
 
 // Editor 主組件
@@ -94,7 +92,6 @@ export default function Editor({ date }) {
           date
         );
         await setDoc(userDiaryRef, { editorState: serializedState });
-        window.location.reload();
         alert("save successfully!");
       } catch (error) {
         console.error("Error writing document:", error);

@@ -1,11 +1,17 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import styles from "./Header.module.css";
 import { useRouter } from "next/router";
+import useAuth from "@/hooks/useAuth";
 
 const Header = () => {
   const router = useRouter();
+  const isLogin = useAuth();
   const handleSignupLoginClick = () => {
     router.push("/?showMember=true", undefined, { shallow: true });
+  };
+
+  const handleGoToDiary = () => {
+    router.push("/diary");
   };
   return (
     <div className={styles.header}>
@@ -17,9 +23,15 @@ const Header = () => {
       <div className={styles.joinUs}>
         Sign up and start your personal journaling experience.
       </div>
-      <div className={styles.line}>
-        <button onClick={handleSignupLoginClick}>Join us</button>
-      </div>
+      {isLogin ? (
+        <div className={styles.line}>
+          <button onClick={handleGoToDiary}>start your journey</button>
+        </div>
+      ) : (
+        <div className={styles.line}>
+          <button onClick={handleSignupLoginClick}>Join us</button>
+        </div>
+      )}
     </div>
   );
 };
