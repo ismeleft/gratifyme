@@ -17,7 +17,6 @@ const MyCalendar = ({ events }) => {
   const auth = getAuth();
 
   useEffect(() => {
-    const auth = getAuth();
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
       console.log(currentUser);
@@ -27,6 +26,8 @@ const MyCalendar = ({ events }) => {
     });
     return () => unsubscribe();
   }, []);
+
+  //抓取已編輯的日記
   const fetchEditedDates = async (uid) => {
     const diaryEntriesRef = collection(
       firebase.db,
@@ -34,23 +35,23 @@ const MyCalendar = ({ events }) => {
       uid,
       "diaryEntries"
     );
+
+    //抓取firestore的資料，根據日期抓取資料
     const querySnapshot = await getDocs(diaryEntriesRef);
     const dates = {};
     querySnapshot.forEach((doc) => {
-      const docId = doc.id;
-      const utcDate = new Date(docId);
-      const localDate = new Date(
-        utcDate.getTime() + utcDate.getTimezoneOffset() * 60000
-      );
-
-      const dateString = moment(localDate).format("YYYY-MM-DD");
+      const dateString = doc.id.split("T")[0];
+      //把日期加到dates
       dates[dateString] = true;
     });
+    //更新狀態重新渲染
     setIsEditedDate(dates);
   };
 
+  //日記上的標示
   const dayPropGetter = (date) => {
     const dateString = moment(date).format("YYYY-MM-DD");
+    //檢查是否已編輯
     if (isEditedDate[dateString]) {
       return {
         className: styles.editedDate,
@@ -58,14 +59,13 @@ const MyCalendar = ({ events }) => {
     }
   };
 
-  const handleEventClick = (event) => {
-    console.log("使用者點選了事件：", event);
-  };
-
   const handleSlotSelect = (slotInfo) => {
     const { start, end } = slotInfo;
-    console.log("使用者點選了日期：", start, end);
+    router.push(`/editor/${end.toISOString()}`);
+  };
 
+  const handleSelect = (info) => {
+    const { end } = info;
     router.push(`/editor/${end.toISOString()}`);
   };
 
@@ -79,7 +79,7 @@ const MyCalendar = ({ events }) => {
         startAccessor="start"
         endAccessor="end"
         selectable={true}
-        onSelectEvent={handleEventClick}
+        onSelectEvent={handleSelect}
         onSelectSlot={handleSlotSelect}
         dayPropGetter={dayPropGetter}
       />
