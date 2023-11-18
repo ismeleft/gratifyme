@@ -2,8 +2,6 @@ import { useLexicalComposerContext } from "@lexical/react/LexicalComposerContext
 import { eventTypes } from "./toolbarIcon";
 import { useEffect, useState } from "react";
 import {
-  CAN_REDO_COMMAND,
-  CAN_UNDO_COMMAND,
   REDO_COMMAND,
   UNDO_COMMAND,
   SELECTION_CHANGE_COMMAND,
