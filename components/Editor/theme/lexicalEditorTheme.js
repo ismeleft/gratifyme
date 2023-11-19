@@ -19,7 +19,7 @@ const lexicalEditorTheme = {
     ul: "editor-list-ul",
     listitem: "editor-listitem",
   },
-  image: "editor-image",
+  image: "editorImage",
   link: "editor-link",
   text: {
     bold: "editor-text-bold",
