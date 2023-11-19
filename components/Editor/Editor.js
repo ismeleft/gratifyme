@@ -141,7 +141,7 @@ export default function Editor({ date }) {
         sx={{
           position: "relative",
           background: "white",
-          paddingTop: "16px",
+          padding: "16px",
           borderRadius: "0px 0px 10px 10px",
           opacity: 0.8,
         }}
