@@ -1,34 +1,27 @@
-.editorImage {
-  cursor: default;
-  display: inline-block;
+/* .editorImage {
   position: relative;
-  user-select: none;
-}
+} */
 
-.editorImage img {
+.img {
   max-width: 100%;
+  height: auto;
   cursor: default;
 }
 
-.editorImage img.focused {
+.focused {
   outline: 2px solid rgb(60, 132, 244);
   user-select: none;
 }
 
-.editorImage img.focused.draggable {
+.draggable {
   cursor: grab;
 }
 
-.editorImage img.focused.draggable:active {
+.draggableActive {
   cursor: grabbing;
 }
 
-.editorImage .imageCaptionContainer .treeViewOutput {
-  margin: 0;
-  border-radius: 0;
-}
-
-.editorImage .imageCaptionContainer {
+.imageCaptionContainer {
   display: block;
   position: absolute;
   bottom: 4px;
@@ -43,7 +36,7 @@
   overflow: hidden;
 }
 
-.editorImage .imageCaptionButton {
+.imageCaptionButton {
   display: block;
   position: absolute;
   bottom: 20px;
@@ -61,63 +54,63 @@
   user-select: none;
 }
 
-.editorImage .imageCaptionButton:hover {
+.imageCaptionButtonHover {
   background-color: rgba(60, 132, 244, 0.5);
 }
 
-.editorImage .imageResizer {
+.imageResizer {
   display: block;
-  width: 7px;
-  height: 7px;
+  width: 14px;
+  height: 14px;
   position: absolute;
   background-color: rgb(60, 132, 244);
   border: 1px solid #fff;
 }
 
-.editorImage .imageResizer.imageResizerN {
-  top: -6px;
-  left: 48%;
+.imageResizerN {
+  top: -7px;
+  left: calc(50% - 7px);
   cursor: n-resize;
 }
 
-.editorImage .imageResizer.imageResizerNe {
-  top: -6px;
-  right: -6px;
+.imageResizerNe {
+  top: -7px;
+  right: -7px;
   cursor: ne-resize;
 }
 
-.editorImage .imageResizer.imageResizerE {
-  bottom: 48%;
-  right: -6px;
+.imageResizerE {
+  top: calc(50% - 7px);
+  right: -7px;
   cursor: e-resize;
 }
 
-.editorImage .imageResizer.imageResizerSe {
-  bottom: -2px;
-  right: -6px;
-  cursor: nwse-resize;
+.imageResizerSe {
+  bottom: -7px;
+  right: -7px;
+  cursor: se-resize;
 }
 
-.editorImage .imageResizer.imageResizerS {
-  bottom: -2px;
-  left: 48%;
+.imageResizerS {
+  bottom: -7px;
+  left: calc(50% - 7px);
   cursor: s-resize;
 }
 
-.editorImage .imageResizer.imageResizerSw {
-  bottom: -2px;
-  left: -6px;
+.imageResizerSw {
+  bottom: -7px;
+  left: -7px;
   cursor: sw-resize;
 }
 
-.editorImage .imageResizer.imageResizerW {
-  bottom: 48%;
-  left: -6px;
+.imageResizerW {
+  top: calc(50% - 7px);
+  left: -7px;
   cursor: w-resize;
 }
 
-.editorImage .imageResizer.imageResizerNw {
-  top: -6px;
-  left: -6px;
+.imageResizerNw {
+  top: -7px;
+  left: -7px;
   cursor: nw-resize;
 }
