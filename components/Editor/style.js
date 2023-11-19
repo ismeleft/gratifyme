@@ -14,8 +14,8 @@ export const MuiContentEditable = styled(ContentEditable)({
 
 export const placeHolderSx = {
   position: "absolute",
-  top: 15,
-  left: 10,
+  top: "16px",
+  left: "26px",
   userSelect: "none",
   display: "inline-block",
   pointerEvents: "none",
