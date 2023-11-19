@@ -10,12 +10,13 @@ import { getAuth, onAuthStateChanged } from "firebase/auth";
 
 const localizer = momentLocalizer(moment);
 
-const MyCalendar = ({ events }) => {
+const MyCalendar = () => {
   const router = useRouter();
   const [isEditedDate, setIsEditedDate] = useState({});
   const [user, setUser] = useState(null);
   const auth = getAuth();
 
+  //確認使用者登入狀態
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
@@ -60,7 +61,7 @@ const MyCalendar = ({ events }) => {
   };
 
   const handleSlotSelect = (slotInfo) => {
-    const { start, end } = slotInfo;
+    const { end } = slotInfo;
     router.push(`/editor/${end.toISOString()}`);
   };
 
@@ -75,7 +76,6 @@ const MyCalendar = ({ events }) => {
         className={styles.rbcCalendar}
         views={["month"]}
         localizer={localizer}
-        events={events}
         startAccessor="start"
         endAccessor="end"
         selectable={true}

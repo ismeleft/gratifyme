@@ -4,7 +4,7 @@ import styles from "./Diaryguide.module.css";
 const Diaryguide = () => {
   return (
     <div className={styles.diaryGuide}>
-      <p className={styles.diaryGuideTitle}>Gratitude Journal Instructions:</p>
+      <p className={styles.diaryGuideTitle}>GratifyME Instructions:</p>
       <p className={styles.diaryGuideText}>
         Please feel comfortable in this space.
         <br />
