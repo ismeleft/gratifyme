@@ -41,6 +41,7 @@
   cursor: pointer;
 }
 .diaryLink:hover,
+.diary:hover,
 .signin:hover,
 .logout:hover {
   color: #ff6666;
