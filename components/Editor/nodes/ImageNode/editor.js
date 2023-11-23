@@ -175,7 +175,7 @@ export class ImageNode extends DecoratorNode {
 export function $createImageNode({
   altText,
   height,
-  maxWidth = 500,
+  maxWidth = "100%",
   captionsEnabled,
   src,
   width,
