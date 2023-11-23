@@ -1,5 +1,5 @@
 import { useRouter } from "next/router";
-import React from "react";
+import React, { useEffect } from "react";
 import Editor from "../../components/Editor/Editor";
 import Nav from "@/components/Nav/Nav";
 import { ThemeProvider } from "@emotion/react";
@@ -12,6 +12,27 @@ export default function CalendarDatePage() {
   const router = useRouter();
   const { date } = router.query;
 
+  // useEffect(() => {
+  //   // 處理程式導航
+  //   const handleRouteChange = (url) => {
+  //     if (!window.confirm("您確定要離開這個頁面嗎？請記得存檔")) {
+  //       throw "routeChange aborted.";
+  //     }
+  //   };
+
+  //   // 處理瀏覽器動作（前進、後退）
+  //   const handleBeforePopState = () => {
+  //     return window.confirm("您確定要離開這個頁面嗎？請記得存檔");
+  //   };
+
+  //   router.events.on("routeChangeStart", handleRouteChange);
+  //   router.beforePopState(handleBeforePopState);
+
+  //   return () => {
+  //     router.events.off("routeChangeStart", handleRouteChange);
+  //     // beforePopState 不需要解除綁定，因為它僅對當前頁面生效
+  //   };
+  // }, [router]);
   // 根據日期顯示相應的內容
   return (
     <div className={styles.editorWrapper}>
@@ -25,7 +46,7 @@ export default function CalendarDatePage() {
             maxWidth: "1200px",
             display: "flex",
             justifyContent: "space-around",
-            alignItems: "center",
+            // alignItems: "center",
             flexWrap: "wrap",
           }}
         >

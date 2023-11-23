@@ -4,22 +4,14 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  /* font-family: "Poppins", Arial, Helvetica, sans-serif; */
   font-family: "Courgette", cursive;
 }
 
 body {
   background-color: #fff;
-  /* background: rgb(66, 116, 141);
-  background: linear-gradient(
-    100deg,
-    rgba(66, 116, 141, 1) 20%,
-    rgba(245, 245, 220, 1) 87%
-  ); */
 }
 h1 {
   font-size: 32px;
-  /* font-family: "Poppins", sans-serif; */
   font-weight: 600;
 }
 a {
@@ -53,4 +45,8 @@ input {
   padding: 5px;
   font-size: 16px;
   margin: 5px;
+}
+p:empty {
+  margin-top: 1em;
+  margin-bottom: 1em;
 }

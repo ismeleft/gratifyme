@@ -36,7 +36,6 @@ export default function Member() {
       signInWithEmailAndPassword(firebase.auth, email, password)
         .then((userCredential) => {
           router.push("/");
-          console.log("Login success:", userCredential);
         })
         .catch((error) => {
           console.error("Login error:", error);
@@ -45,7 +44,6 @@ export default function Member() {
     } else {
       createUserWithEmailAndPassword(firebase.auth, email, password)
         .then((userCredential) => {
-          console.log("Register success:", userCredential);
           alert("Sign in success, please login now!");
         })
         .catch((error) => {

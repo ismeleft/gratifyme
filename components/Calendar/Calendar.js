@@ -20,7 +20,6 @@ const MyCalendar = () => {
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
-      console.log(currentUser);
       if (currentUser) {
         fetchEditedDates(currentUser.uid);
       }

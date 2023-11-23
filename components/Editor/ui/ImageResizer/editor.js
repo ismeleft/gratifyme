@@ -217,7 +217,7 @@ export default function ImageResizer({
   };
   return (
     <div ref={controlWrapperRef} className={styles.editorImage}>
-      {!showCaption && captionsEnabled && (
+      {/* {!showCaption && captionsEnabled && (
         <button
           className={styles.imageCaptionButton}
           ref={buttonRef}
@@ -227,7 +227,7 @@ export default function ImageResizer({
         >
           Add Caption
         </button>
-      )}
+      )} */}
       <div
         className={`${styles.imageResizer} ${styles.imageResizerN}`}
         onPointerDown={(event) => {

@@ -1,6 +1,6 @@
-/* .editorImage {
+.editorImage {
   position: relative;
-} */
+}
 
 .img {
   max-width: 100%;
@@ -13,15 +13,15 @@
   user-select: none;
 }
 
-.draggable {
+/* .draggable {
   cursor: grab;
 }
 
 .draggableActive {
   cursor: grabbing;
-}
+} */
 
-.imageCaptionContainer {
+/* .imageCaptionContainer {
   display: block;
   position: absolute;
   bottom: 4px;
@@ -56,17 +56,17 @@
 
 .imageCaptionButtonHover {
   background-color: rgba(60, 132, 244, 0.5);
-}
+} */
 
-.imageResizer {
+/* .imageResizer {
   display: block;
   width: 14px;
   height: 14px;
   position: absolute;
   background-color: rgb(60, 132, 244);
   border: 1px solid #fff;
-}
-
+} */
+/* 
 .imageResizerN {
   top: -7px;
   left: calc(50% - 7px);
@@ -113,4 +113,4 @@
   top: -7px;
   left: -7px;
   cursor: nw-resize;
-}
+} */

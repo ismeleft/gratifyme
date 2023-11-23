@@ -18,15 +18,20 @@ import {
 } from "lexical";
 import { useEffect, useRef, useState } from "react";
 import React from "react";
-
 import { Box, Button, Grid, TextField } from "@mui/material";
-
 import { CAN_USE_DOM } from "../../../components/Editor/utils/canUseDom";
 import {
   $createImageNode,
   $isImageNode,
   ImageNode,
 } from "../nodes/ImageNode/editor";
+import firebase from "@/utils/firebase";
+import {
+  getStorage,
+  ref as storageRef,
+  uploadBytes,
+  getDownloadURL,
+} from "firebase/storage";
 
 const getDOMSelection = (targetWindow) =>
   CAN_USE_DOM ? (targetWindow || window).getSelection() : null;
@@ -75,20 +80,42 @@ export function InsertImageUriDialogBody({ onClick }) {
 export function InsertImageUploadedDialogBody({ onClick }) {
   const [src, setSrc] = useState("");
   const [altText, setAltText] = useState("");
+  const storage = getStorage();
 
   const isDisabled = src === "";
 
   const loadImage = (files) => {
-    const reader = new FileReader();
-    reader.onload = function () {
-      if (typeof reader.result === "string") {
-        setSrc(reader.result);
-      }
-      return "";
-    };
-    if (files !== null) {
-      reader.readAsDataURL(files[0]);
+    if (files.length === 0) {
+      return;
     }
+    const file = files[0];
+    const storage = getStorage();
+    const imageRef = storageRef(storage, `images/${file.name}`);
+    uploadBytes(imageRef, file)
+      .then((snapshot) => {
+        //拿到url為了存到firestore
+        getDownloadURL(snapshot.ref)
+          .then((url) => {
+            setSrc(url);
+          })
+          .catch((error) => {
+            console.error("Error getting download URL", error);
+          });
+      })
+      .catch((error) => {
+        console.error("Error uploading file", error);
+      });
+
+    // const reader = new FileReader();
+    // reader.onload = function () {
+    //   if (typeof reader.result === "string") {
+    //     setSrc(reader.result);
+    //   }
+    //   return "";
+    // };
+    // if (files !== null) {
+    //   reader.readAsDataURL(files[0]);
+    // }
   };
 
   return (
