@@ -95,6 +95,10 @@
     flex-basis: 100%;
     max-width: 85%;
   }
+  .css-1iptbix {
+    flex-basis: 100% !important;
+    max-width: 100% !important;
+  }
 }
 
 @media screen and (max-width: 430px) {
