@@ -1,11 +1,9 @@
-/* .myCalendarWrapper {
-  padding: 10px;
-  display: flex;
-  justify-content: center;
-} */
+.myCalendarWrapper {
+  width: 130%;
+}
 
 .rbcCalendar {
-  width: 38vw;
+  width: 100%;
   height: 55vh;
   border: 1px solid rgba(128, 128, 128, 0.3);
   border-radius: 5px;
@@ -24,15 +22,39 @@
 }
 
 @media only screen and (max-width: 1200px) {
+  .myCalendarWrapper {
+    width: 100%;
+  }
   .rbcCalendar {
-    width: 35vw;
+    width: 100%;
     height: 50vh;
   }
 }
 
 @media only screen and (max-width: 768px) {
+  .myCalendarWrapper {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
   .rbcCalendar {
     width: 80vw;
     height: 50vh;
+  }
+}
+
+@media screen and (max-width: 430px) {
+  .rbcCalendar {
+    width: 85vw;
+    height: 50vh;
+  }
+  .editedDate::after {
+    content: "";
+    display: block;
+    width: 15px;
+    height: 15px;
+    background-image: url("/images/diary.png");
+    background-size: cover;
+    margin: 3px;
   }
 }

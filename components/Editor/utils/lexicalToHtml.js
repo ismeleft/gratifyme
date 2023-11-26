@@ -30,6 +30,8 @@ export default function convertLexicalNodesToHTML(nodes) {
           textHTML = `<em>${textHTML}</em>`;
         }
         return textHTML;
+      } else if (node.type === "image") {
+        return `<img src="${node.src}" width="60%"  alt="${node.alt || ""}" />`;
       }
     })
     .join("");

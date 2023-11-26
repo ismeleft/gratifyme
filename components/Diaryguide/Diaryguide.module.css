@@ -13,15 +13,20 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 80%;
+    padding: 20px;
+    width: 90%;
   }
 }
 
-@media only screen and (max-width: 768px) {
+@media only screen and (max-width: 850px) {
   .diaryGuide {
     display: flex;
     flex-direction: column;
-    align-items: center;
+    width: 100%;
+    margin: 20px;
+  }
+  .diaryGuideTitle {
+    padding: 10px;
   }
   .diaryGuideText {
     padding: 10px;
