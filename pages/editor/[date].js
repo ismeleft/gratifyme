@@ -52,7 +52,19 @@ export default function CalendarDatePage() {
             flexWrap: "wrap",
           }}
         >
-          <Grid className={styles.muiItem} item xs={5} sx={{ mt: 10 }}>
+          <Grid
+            item
+            sx={{
+              mt: 10,
+              padding: "30px",
+              flexBasis: "90% !important",
+              maxWidth: "none !important",
+              [theme.breakpoints.up("md")]: {
+                flexBasis: "50% !important",
+              },
+            }}
+          >
+            {" "}
             <Typography variant="p" sx={{ fontSize: "30px" }}>
               Gratitude journal
             </Typography>
@@ -70,7 +82,18 @@ export default function CalendarDatePage() {
               others. Who did you help?
             </Typography>
           </Grid>
-          <Grid item className={styles.muiItem} xs={5} sx={{ mt: 10, ml: 2 }}>
+          <Grid
+            item
+            sx={{
+              mt: 10,
+              padding: "30px",
+              flexBasis: "90% !important",
+              maxWidth: "none !important",
+              [theme.breakpoints.up("md")]: {
+                flexBasis: "50% !important",
+              },
+            }}
+          >
             <Editor date={date} />
           </Grid>
         </Grid>

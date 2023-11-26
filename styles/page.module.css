@@ -62,7 +62,7 @@
   }
 }
 
-@media screen and (max-width: 850px) {
+@media screen and (max-width: 900px) {
   .homeLayout {
     background-position: center center;
   }
@@ -90,15 +90,11 @@
   .muiContainer {
     display: flex;
     flex-wrap: wrap;
+    min-height: 0vh;
   }
   .muiItem {
     flex-basis: 100%;
     max-width: 85%;
-  }
-  .css-1iptbix,
-  .css-r2inob {
-    flex-basis: 100% !important;
-    max-width: 100% !important;
   }
 }
 
