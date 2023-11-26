@@ -1,0 +1,37 @@
+.mobileBackgroundWrapper {
+  background-color: #efefef;
+  border-radius: 0px 15px 15px 0px;
+  padding: 10px 10px;
+  position: relative;
+  min-height: 100vh;
+  width: 100%;
+  z-index: -1;
+  position: absolute;
+  display: none;
+}
+.dotContainer {
+  display: flex;
+  flex-direction: column;
+}
+.dot {
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  background-color: #a9a8a89d;
+  margin: 30px 0px;
+}
+
+/* .redLine {
+  position: absolute;
+  width: 90vh;
+  right: 280px;
+  bottom: 380px;
+  border: 1px solid rgba(203, 54, 54, 0.7);
+  transform: rotate(90deg);
+} */
+
+@media screen and (max-width: 1200px) {
+  .mobileBackgroundWrapper {
+    display: block;
+  }
+}

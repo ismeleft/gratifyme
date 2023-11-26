@@ -7,6 +7,7 @@ import theme from "@/components/Editor/theme/editor";
 import { CssBaseline, Grid, Typography, Box } from "@mui/material";
 import "../../components/Editor/style";
 import styles from "../../styles/page.module.css";
+import MobileBackground from "@/components/MobileBackground/MobileBackground";
 
 export default function CalendarDatePage() {
   const router = useRouter();
@@ -37,20 +38,21 @@ export default function CalendarDatePage() {
   return (
     <div className={styles.editorWrapper}>
       <Nav className={styles.editorNav} />
+      <MobileBackground className={styles.mobileBackground} />
       <ThemeProvider theme={theme}>
         <CssBaseline />
         <Grid
           container
+          className={styles.muiContainer}
           sx={{
             minHeight: "100vh",
             maxWidth: "1200px",
             display: "flex",
             justifyContent: "space-around",
-            // alignItems: "center",
             flexWrap: "wrap",
           }}
         >
-          <Grid item xs={5} sx={{ mt: 10 }}>
+          <Grid className={styles.muiItem} item xs={5} sx={{ mt: 10 }}>
             <Typography variant="p" sx={{ fontSize: "30px" }}>
               Gratitude journal
             </Typography>
@@ -68,7 +70,7 @@ export default function CalendarDatePage() {
               others. Who did you help?
             </Typography>
           </Grid>
-          <Grid item xs={4.5} sx={{ mt: 10, ml: 2 }}>
+          <Grid item className={styles.muiItem} xs={5} sx={{ mt: 10, ml: 2 }}>
             <Editor date={date} />
           </Grid>
         </Grid>

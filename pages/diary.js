@@ -4,6 +4,7 @@ import { getAuth, onAuthStateChanged } from "firebase/auth";
 import Nav from "../components/Nav/Nav";
 import MyCalendar from "../components/Calendar/Calendar";
 import Diaryguide from "@/components/Diaryguide/Diaryguide";
+import MobileBackground from "@/components/MobileBackground/MobileBackground";
 import styles from "../styles/page.module.css";
 
 const Diary = () => {
@@ -22,6 +23,7 @@ const Diary = () => {
   return (
     <div className={styles.diaryWrapper}>
       <Nav />
+      <MobileBackground className={styles.mobileBackground} />
       <div className={styles.diaryPage}>
         <div className={styles.diaryLayout}>
           <div className={styles.diaryGuide}>

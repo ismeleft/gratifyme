@@ -10,12 +10,18 @@
 }
 
 /* diary page */
+.diaryWrapper {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
 
 .diaryPage {
   background-image: url("../public/images/book.jpeg");
   background-position: center;
   background-size: 150% 130%;
   display: flex;
+  flex: 1;
   align-items: center;
   justify-content: center;
 }
@@ -30,6 +36,9 @@
 }
 .diaryGuide {
   margin-top: 50px;
+}
+.mobileBackground {
+  display: none;
 }
 
 /* editor page */
@@ -48,25 +57,45 @@
   .diaryPage {
     width: 100%;
   }
+  .mobileBackground {
+    display: none;
+  }
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 850px) {
   .homeLayout {
     background-position: center center;
   }
   .diaryPage {
     background-image: none;
-    background-color: rgb(241, 241, 241);
+    /* background-color: rgb(241, 241, 241); */
   }
   .diaryLayout {
-    flex-wrap: wrap;
-    flex-direction: column;
     gap: 0%;
+    display: flex;
+    align-content: center;
   }
   .diaryCalendar {
-    width: 100%;
+    width: 90%;
   }
   .diaryGuide {
-    width: 100%;
+    width: 90%;
   }
+  .mobileBackground {
+    display: block;
+  }
+  .editorWrapper {
+    background-image: none;
+  }
+  .muiContainer {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  .muiItem {
+    flex-basis: 100%;
+    max-width: 85%;
+  }
+}
+
+@media screen and (max-width: 430px) {
 }

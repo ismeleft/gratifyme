@@ -1,0 +1,25 @@
+.diaryWrapper {
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    rgb(223, 223, 223) 0%,
+    rgb(229, 229, 229) 27%,
+    rgba(255, 255, 255, 0.486453956582633) 100%
+  );
+  display: flex;
+  z-index: -1;
+  position: absolute;
+}
+
+.pageLeft {
+  width: 50vw;
+  /* height: 110vh; */
+  border-right: #66666659 3px solid;
+  box-shadow: 30px 30px 50px -30px rgba(0, 0, 0, 0.2);
+}
+
+.pageRight {
+  width: 50vw;
+  /* height: 110vh; */
+  box-shadow: 30px 30px 50px -30px rgba(0, 0, 0, 0.2);
+}
