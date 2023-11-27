@@ -20,6 +20,10 @@ import { LinkPlugin } from "@lexical/react/LexicalLinkPlugin";
 import ImagesPlugin from "../Editor/plugin/ImagePlugin.js";
 import ReadOnlyEditor from "./ReadOnlyEditor";
 import ToggleButton from "../ToggleButton/ToggleButton";
+import AlertDialog from "../AlertDialog/AlertDialog";
+import Alert from "@mui/material/Alert";
+import AlertTitle from "@mui/material/AlertTitle";
+import Stack from "@mui/material/Stack";
 
 // 讀取Firestore的資料
 function EditorInnerComponent({ date, uid, onEditorReady }) {
@@ -65,6 +69,8 @@ export default function Editor({ date }) {
   const [uid, setUid] = useState(null);
   const [editorInstance, setEditorInstance] = useState(null);
   const [isEditMode, setIsEditMode] = useState(true);
+  const [showDialog, setShowDialog] = useState(false);
+  const [showAlert, setShowAlert] = useState(false);
 
   // 切換編輯模式的函數
   const toggleEditMode = useCallback(() => {
@@ -101,12 +107,17 @@ export default function Editor({ date }) {
           date
         );
         await setDoc(userDiaryRef, { editorState: serializedState });
-        alert("save successfully!");
+        setShowAlert(true);
+        setTimeout(() => {
+          setShowAlert(false);
+        }, 2200);
       } catch (error) {
         console.error("Error writing document:", error);
       }
     }
   };
+
+  //刪除firebase storage & firestore
   const deleteToFirebase = async () => {
     const diaryEntryRef = doc(firebase.db, "users", uid, "diaryEntries", date);
     const diarySnapshot = await getDoc(diaryEntryRef);
@@ -144,9 +155,9 @@ export default function Editor({ date }) {
 
       // 刪除 Firestore 中的日記
       try {
-        confirm("Are you want to delete this diary?");
         await deleteDoc(diaryEntryRef);
         console.log("Diary entry deleted successfully from Firestore.");
+        setShowDialog(false);
         router.reload();
       } catch (error) {
         console.error("Failed to delete diary entry from Firestore:", error);
@@ -155,6 +166,14 @@ export default function Editor({ date }) {
       console.log("Diary entry does not exist.");
     }
   };
+  // 處理對話框的確認操作
+  const handleDialogConfirm = () => {
+    deleteToFirebase();
+  };
+
+  const handleDialogClose = () => {
+    setShowDialog(false);
+  };
 
   const handleEditorChange = (editorState) => {
     editorState.read(() => {
@@ -162,22 +181,39 @@ export default function Editor({ date }) {
       setContent(currentContent);
     });
   };
+  const handleDeleteClick = () => {
+    setShowDialog(true);
+  };
 
   return (
     <LexicalComposer initialConfig={lexicalEditorConfig}>
       <ToggleButton isChecked={isEditMode} onToggle={toggleEditMode} />
       {isEditMode ? (
         <>
+          {showAlert && (
+            <Stack
+              sx={{
+                width: "25%",
+                position: "absolute",
+                top: "80px",
+                right: "100px",
+                zIndex: 1,
+              }}
+              spacing={2}
+            >
+              <Alert severity="success">
+                <AlertTitle>Success</AlertTitle>
+                Diary saved successfully!
+              </Alert>
+            </Stack>
+          )}
           <button
             className={styles.addSubmit}
             onClick={() => saveToFirebase(content)}
           >
             Save
           </button>
-          <button
-            className={styles.deleteSubmit}
-            onClick={() => deleteToFirebase(content)}
-          >
+          <button className={styles.deleteSubmit} onClick={handleDeleteClick}>
             Delete
           </button>
           <Toolbar />
@@ -214,6 +250,11 @@ export default function Editor({ date }) {
       ) : (
         <ReadOnlyEditor editorContent={content} />
       )}
+      <AlertDialog
+        open={showDialog}
+        handleClose={handleDialogClose}
+        handleConfirm={handleDialogConfirm}
+      />
     </LexicalComposer>
   );
 }

@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Courgette&family=Poppins:ital,wght@0,300;0,400;0,500;0,800;1,800&display=swap");
+
 .addSubmit {
   margin: 10px 5px;
   border-radius: 10px;
@@ -177,4 +179,8 @@
   to {
     transform: rotateY(180deg);
   }
+}
+
+.alertTitle {
+  font-family: "Courgette", cursive;
 }
