@@ -193,7 +193,7 @@ export default function Editor({ date }) {
           {showAlert && (
             <Stack
               sx={{
-                width: "25%",
+                width: "300px",
                 position: "absolute",
                 top: "80px",
                 right: "100px",

@@ -32,6 +32,12 @@ export default function convertLexicalNodesToHTML(nodes) {
         return textHTML;
       } else if (node.type === "image") {
         return `<img src="${node.src}" width="60%"  alt="${node.alt || ""}" />`;
+      } else if (node.type === "heading") {
+        const level = node.tag;
+        const childrenHTML = node.children
+          ? convertLexicalNodesToHTML(node.children)
+          : "";
+        return `<${level}>${childrenHTML}</${level}>`;
       }
     })
     .join("");

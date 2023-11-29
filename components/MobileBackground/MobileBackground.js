@@ -23,7 +23,6 @@ const MobileBackground = () => {
         <div className={styles.dot}></div>
         <div className={styles.dot}></div>
       </div>
-      {/* <div className={styles.redLine}></div> */}
     </div>
   );
 };

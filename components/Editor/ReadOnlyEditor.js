@@ -9,10 +9,12 @@ const ReadOnlyEditor = ({ editorContent }) => {
     : "";
 
   return (
-    <div
-      className={styles.readOnlyWrapper}
-      dangerouslySetInnerHTML={{ __html: htmlContent }}
-    />
+    <>
+      <div
+        className={styles.readOnlyWrapper}
+        dangerouslySetInnerHTML={{ __html: htmlContent }}
+      />
+    </>
   );
 };
 
