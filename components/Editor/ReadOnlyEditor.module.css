@@ -1,6 +1,30 @@
 .readOnlyWrapper {
   margin-top: 30px;
-  line-height: 30px;
-  /* text-decoration: underline;
-  text-underline-offset: 3px; */
+  line-height: 32px;
+  /* 其他樣式 */
 }
+
+.readOnlyWrapper > p {
+  background-image: linear-gradient(to bottom, #00000056 1px, transparent 1px);
+  background-size: 100% 30px;
+}
+
+.readOnlyWrapper > ul,
+.readOnlyWrapper > ol {
+  background-image: linear-gradient(to bottom, #00000056 1px, transparent 1px);
+  background-size: 100% 30px;
+}
+
+.readOnlyWrapper > h1 {
+  background-image: linear-gradient(to bottom, #00000056 1px, transparent 1px);
+  background-size: 100% 31px;
+}
+.readOnlyWrapper > h2 {
+  background-image: linear-gradient(to bottom, #00000056 1px, transparent 1px);
+  background-size: 100% 30px;
+}
+.readOnlyWrapper > image {
+  background-image: none;
+}
+
+/* 如果有其他需要特殊處理的元素，根據類型添加對應的樣式 */

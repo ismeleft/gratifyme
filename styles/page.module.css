@@ -4,7 +4,7 @@
 }
 
 .homeLayout {
-  background-image: url("../public/images/diarybook.jpeg");
+  background-image: url("../public/images/diarybook.webp");
   height: 100vh;
   background-size: cover;
 }
@@ -17,7 +17,7 @@
 }
 
 .diaryPage {
-  background-image: url("../public/images/book.jpeg");
+  background-image: url("../public/images/book.webp");
   background-position: center;
   background-size: 150% 130%;
   display: flex;
@@ -28,7 +28,7 @@
 .diaryLayout {
   display: flex;
   flex-direction: row;
-  justify-content: space-around;
+  justify-content: space-evenly;
   align-items: center;
   flex-wrap: wrap;
   width: 1200px;
@@ -37,13 +37,13 @@
 .diaryGuide {
   margin-top: 50px;
 }
-.mobileBackground {
+.mobileBackgroundWrapper {
   display: none;
 }
 
 /* editor page */
 .editorWrapper {
-  background-image: url("../public/images/book.jpeg");
+  background-image: url("../public/images/book.webp");
   background-position: center;
   background-size: 150% 130%;
   display: flex;
@@ -57,7 +57,7 @@
   .diaryPage {
     width: 100%;
   }
-  .mobileBackground {
+  .mobileBackgroundWrapper {
     display: none;
   }
 }
@@ -68,7 +68,6 @@
   }
   .diaryPage {
     background-image: none;
-    /* background-color: rgb(241, 241, 241); */
   }
   .diaryLayout {
     gap: 0%;
@@ -81,7 +80,7 @@
   .diaryGuide {
     width: 90%;
   }
-  .mobileBackground {
+  .mobileBackgroundWrapper {
     display: block;
   }
   .editorWrapper {
@@ -96,7 +95,4 @@
     flex-basis: 100%;
     max-width: 85%;
   }
-}
-
-@media screen and (max-width: 430px) {
 }
