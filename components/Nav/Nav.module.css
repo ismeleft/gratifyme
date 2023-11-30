@@ -5,7 +5,6 @@
   position: fixed;
   justify-content: center;
   z-index: 2;
-
   /* border-bottom: 1px solid rgba(255, 255, 255, 0.3); */
 }
 
@@ -49,4 +48,15 @@
 .signin {
   margin-right: 20px;
   color: #666;
+}
+
+@media screen and (max-width: 900px) {
+  .navContainer {
+    background: linear-gradient(
+      90deg,
+      rgb(223, 223, 223) 0%,
+      rgb(229, 229, 229) 27%,
+      rgba(255, 255, 255, 0.486453956582633) 100%
+    );
+  }
 }

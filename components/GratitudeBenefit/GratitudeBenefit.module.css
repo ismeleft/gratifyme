@@ -1,0 +1,70 @@
+.gratitudeBenefitWrapper {
+  background-color: #f2f2f3;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.gratitudeBenefitTitle {
+  text-align: center;
+  padding: 20px 0px;
+  font-size: 30px;
+  color: #6b6b6b;
+}
+.gratitudeBenefitContainer {
+  display: flex;
+  max-width: 1200px;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+}
+
+.gratitudeBenefitItems {
+  display: flex;
+  gap: 5%;
+  padding: 30px;
+}
+
+.gratitudeBenefitItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  list-style: none;
+  line-height: 30px;
+  padding: 20px;
+  border-radius: 10px;
+  background-color: #3a606ec0;
+  box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+  /* border: 2px solid #4b543b; */
+}
+.gratitudeBenefitItem:hover {
+  transform: scale(1.1);
+  transition: all 0.2s ease;
+}
+
+.gratitudeBenefitItemTitle {
+  padding: 20px 0px;
+  color: #f0eded;
+}
+
+.gratitudeBenefitItemInfo {
+  text-align: center;
+}
+
+.gratitudeBenefitItemImage {
+  opacity: 0.8;
+}
+
+.gratitudeBenefitItemText {
+  color: #f0eded;
+}
+
+@media screen and (max-width: 500px) {
+  .gratitudeBenefitItems {
+    flex-wrap: wrap;
+    margin: 30px 30px;
+  }
+  .gratitudeBenefitItem {
+    margin: 20px 0px;
+  }
+}
