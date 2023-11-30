@@ -7,8 +7,27 @@
   background-image: url("../public/images/diarybook.webp");
   height: 100vh;
   background-size: cover;
+  position: relative;
 }
-
+.mouseCursor {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  animation: blink 1s infinite;
+}
+@keyframes blink {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+.middleLayout {
+  height: 50vh;
+}
 /* diary page */
 .diaryWrapper {
   min-height: 100vh;
@@ -80,11 +99,17 @@
   .diaryGuide {
     width: 90%;
   }
+  .diaryNav {
+    background-color: #c2a8a8;
+  }
   .mobileBackgroundWrapper {
     display: block;
   }
   .editorWrapper {
     background-image: none;
+  }
+  .editorNav {
+    background-color: #e1e1e1;
   }
   .muiContainer {
     display: flex;
