@@ -1,0 +1,10 @@
+.footerWrapper {
+  height: 20vh;
+  background-color: #666;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.footerText {
+  color: #fff;
+}
