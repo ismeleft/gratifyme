@@ -3,6 +3,7 @@ import Nav from "../components/Nav/Nav";
 import Header from "../components/Header/Header";
 import Member from "@/components/Member/Member";
 import GratitudeBenefit from "@/components/GratitudeBenefit/GratitudeBenefit";
+import { Footer } from "@/components/Footer/Footer";
 import { useRouter } from "next/router";
 
 export default function Home() {
@@ -28,6 +29,7 @@ export default function Home() {
       <div className={styles.middleLayout}>
         <GratitudeBenefit />
       </div>
+      <Footer />
     </>
   );
 }
