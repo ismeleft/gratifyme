@@ -11,17 +11,14 @@ import {
   GoogleAuthProvider,
   signInWithPopup,
 } from "firebase/auth";
+import { useUser } from "@/hooks/useUser";
 
 export default function Member() {
   const router = useRouter();
-
-  const {
-    register,
-    handleSubmit,
-    watch,
-    formState: { errors },
-  } = useForm();
+  const loginForm = useForm();
+  const registerForm = useForm();
   const [showLogin, setShowLogin] = useState(false);
+  const { setUserName } = useUser();
 
   const handleClose = () => {
     router.push("/", undefined, { shallow: true });
@@ -30,34 +27,47 @@ export default function Member() {
   const toggleForm = () => {
     setShowLogin(!showLogin);
   };
-  const onSubmit = (data) => {
+  const onSubmitLogin = (data) => {
     const { email, password } = data;
     if (showLogin) {
       signInWithEmailAndPassword(firebase.auth, email, password)
         .then((userCredential) => {
+          const user = userCredential.user;
+          // 儲存到 localStorage
+          localStorage.setItem("userName", user.email);
+          // 更新 Context 中的 userName
+          setUserName(user.email);
+
           router.push("/");
         })
         .catch((error) => {
           console.error("Login error:", error);
           alert(error);
         });
-    } else {
-      createUserWithEmailAndPassword(firebase.auth, email, password)
-        .then((userCredential) => {
-          alert("Sign in success, please login now!");
-        })
-        .catch((error) => {
-          console.error("Register error:", error);
-          alert(error);
-        });
     }
+  };
+
+  const onSubmitRegister = (data) => {
+    const { email, password } = data;
+    createUserWithEmailAndPassword(firebase.auth, email, password)
+      .then((userCredential) => {
+        alert("Signup success, please login now!");
+      })
+      .catch((error) => {
+        console.error("Register error:", error);
+        alert(error);
+      });
   };
 
   const handleGoogle = async (e) => {
     e.preventDefault();
     const provider = new GoogleAuthProvider();
     try {
-      await signInWithPopup(firebase.auth, provider);
+      const result = await signInWithPopup(firebase.auth, provider);
+      const user = result.user;
+      console.log(user);
+      localStorage.setItem("userName", user.displayName || user.email);
+      setUserName(user.displayName || user.email);
       router.push("/");
     } catch (error) {
       alert(error);
@@ -65,15 +75,19 @@ export default function Member() {
   };
 
   return (
-    <div className={styles.container}>
+    <div className={styles.memberContainer}>
       <h1 className={styles.memberpageTitle}>
         Login and enjoy the diary journey!
       </h1>
       {!showLogin && (
         <div className={styles.signupContainer}>
-          <form onSubmit={handleSubmit(onSubmit)}>
+          <form onSubmit={registerForm.handleSubmit(onSubmitRegister)}>
             <h1 className={styles.signupTitle}>Create your account</h1>
-            <button className={styles.googleButton} onClick={handleGoogle}>
+            <button
+              type="button"
+              className={styles.googleButton}
+              onClick={handleGoogle}
+            >
               <Image
                 className={styles.googleImage}
                 src="/images/google.png"
@@ -91,25 +105,32 @@ export default function Member() {
               type="text"
               placeholder="name"
               defaultValue=""
-              {...register("name", { required: true })}
+              {...registerForm.register("name", { required: true })}
             />
             <br />
             <input
               type="email"
               placeholder="email"
               defaultValue=""
-              {...register("email", { required: true })}
+              {...registerForm.register("email", { required: true })}
             />
             <br />
             <input
               type="password"
               placeholder="password"
-              {...register("password", { required: true, minLength: 6 })}
+              {...registerForm.register("password", {
+                required: true,
+                minLength: 6,
+              })}
             />
             <br />
-            {errors.name && <div>Name is required.</div>}
-            {errors.email && <div>Email is required.</div>}
-            {errors.password && <div>Password is required.</div>}
+            {registerForm.formState.errors.name && <div>Name is required.</div>}
+            {registerForm.formState.errors.email && (
+              <div>Email is required.</div>
+            )}
+            {registerForm.formState.errors.password && (
+              <div>Password is required.</div>
+            )}
             <button type="submit" className={styles.memberformBtn}>
               Sign up
             </button>
@@ -124,9 +145,13 @@ export default function Member() {
       )}
       {showLogin && (
         <div className={styles.loginContainer}>
-          <form onSubmit={handleSubmit(onSubmit)}>
+          <form onSubmit={loginForm.handleSubmit(onSubmitLogin)}>
             <h1 className={styles.loginTitle}>Login your account</h1>
-            <button className={styles.googleButton} onClick={handleGoogle}>
+            <button
+              type="button"
+              className={styles.googleButton}
+              onClick={handleGoogle}
+            >
               <Image
                 className={styles.googleImage}
                 src="/images/google.png"
@@ -142,17 +167,19 @@ export default function Member() {
               type="email"
               placeholder="email"
               defaultValue=""
-              {...register("email", { required: true, minLength: 6 })}
+              {...loginForm.register("email", { required: true, minLength: 6 })}
             />
             <br />
             <input
               type="password"
               placeholder="password"
-              {...register("password", { required: true })}
+              {...loginForm.register("password", { required: true })}
             />
             <br />
-            {errors.email && <div>Email is required.</div>}
-            {errors.password && <div>Password is required.</div>}
+            {loginForm.formState.errors.email && <div>Email is required.</div>}
+            {loginForm.formState.errors.password && (
+              <div>Password is required.</div>
+            )}
             <button type="submit" className={styles.memberformBtn}>
               Login
             </button>
