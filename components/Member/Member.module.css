@@ -1,4 +1,4 @@
-.container {
+.memberContainer {
   position: fixed;
   left: 0;
   right: 0;
@@ -10,15 +10,22 @@
   background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
     url("/images/form.webp");
   background-size: cover;
-  width: 100vw;
+  /* width: 100vw; */
   height: 100vh;
   line-height: 30px;
   padding: 30px;
   box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
 }
+
+.signupContainer {
+  padding: 20px;
+}
 .memberpageTitle {
   color: beige;
   margin: 40px;
+  padding: 20px;
+  width: 400px;
+  line-height: 40px;
 }
 
 .memberformBtn {
@@ -52,4 +59,23 @@
 }
 .googleImage {
   margin: 4px;
+}
+
+@media screen and (max-width: 500px) {
+  .memberContainer {
+    flex-direction: column;
+    padding: 15px;
+  }
+
+  .signupContainer,
+  .loginContainer {
+    width: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+  }
+
+  .memberpageTitle {
+    width: auto;
+    margin: 20px 0;
+  }
 }

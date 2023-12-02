@@ -24,6 +24,7 @@ import AlertDialog from "../AlertDialog/AlertDialog";
 import Alert from "@mui/material/Alert";
 import AlertTitle from "@mui/material/AlertTitle";
 import Stack from "@mui/material/Stack";
+import { BeatLoader } from "react-loader-spinner";
 
 // 讀取Firestore的資料
 function EditorInnerComponent({ date, uid, onEditorReady }) {
@@ -36,21 +37,34 @@ function EditorInnerComponent({ date, uid, onEditorReady }) {
     }
 
     async function loadContent() {
-      const userDiaryRef = doc(firebase.db, "users", uid, "diaryEntries", date);
-      const docSnap = await getDoc(userDiaryRef);
+      // setIsLoading(true);
+      try {
+        const userDiaryRef = doc(
+          firebase.db,
+          "users",
+          uid,
+          "diaryEntries",
+          date
+        );
+        const docSnap = await getDoc(userDiaryRef);
 
-      if (docSnap.exists()) {
-        const editorStateData = docSnap.data().editorState;
-        console.log(editorStateData);
-        if (editorStateData) {
-          editor.update(() => {
-            const initialState =
-              typeof editorStateData === "string"
-                ? JSON.parse(editorStateData)
-                : editorStateData;
-            editor.setEditorState(editor.parseEditorState(initialState));
-          });
+        if (docSnap.exists()) {
+          const editorStateData = docSnap.data().editorState;
+          console.log(editorStateData);
+          if (editorStateData) {
+            editor.update(() => {
+              const initialState =
+                typeof editorStateData === "string"
+                  ? JSON.parse(editorStateData)
+                  : editorStateData;
+              editor.setEditorState(editor.parseEditorState(initialState));
+            });
+          }
         }
+      } catch (error) {
+        console.error(error);
+      } finally {
+        // setIsLoading(false);
       }
     }
 
@@ -71,6 +85,7 @@ export default function Editor({ date }) {
   const [isEditMode, setIsEditMode] = useState(true);
   const [showDialog, setShowDialog] = useState(false);
   const [showAlert, setShowAlert] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   // 切換編輯模式的函數
   const toggleEditMode = useCallback(() => {
@@ -187,6 +202,11 @@ export default function Editor({ date }) {
 
   return (
     <LexicalComposer initialConfig={lexicalEditorConfig}>
+      {isLoading && (
+        <div className={styles.loader}>
+          <BeatLoader color="#36D7B7" />
+        </div>
+      )}
       <ToggleButton isChecked={isEditMode} onToggle={toggleEditMode} />
       {isEditMode ? (
         <>
