@@ -1,4 +1,3 @@
-// LoadingOverlay.js
 import { ThreeDots } from "react-loader-spinner";
 
 function LoadingOverlay() {
