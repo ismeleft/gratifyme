@@ -24,7 +24,7 @@ import AlertDialog from "../AlertDialog/AlertDialog";
 import Alert from "@mui/material/Alert";
 import AlertTitle from "@mui/material/AlertTitle";
 import Stack from "@mui/material/Stack";
-import LoadingOverlay from "./LoadingOverLay";
+import LoadingOverlay from "../Editor/LoadingOverLay";
 
 // 讀取Firestore的資料
 function EditorInnerComponent({ date, uid, onEditorReady, setIsLoading }) {
