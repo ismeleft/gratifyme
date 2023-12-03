@@ -195,11 +195,11 @@ export default function Editor({ date }) {
     setShowDialog(true);
   };
 
-  // const handleSave = () => {
-  //   if (isEditMode) {
-  //     saveToFirebase(content);
-  //   }
-  // };
+  const handleSave = () => {
+    if (isEditMode) {
+      saveToFirebase(content);
+    }
+  };
 
   return (
     <LexicalComposer initialConfig={lexicalEditorConfig}>
@@ -207,7 +207,7 @@ export default function Editor({ date }) {
       <ToggleButton
         isChecked={isEditMode}
         onToggle={toggleEditMode}
-        // onSave={handleSave}
+        onSave={handleSave}
       />
       {isEditMode ? (
         <>
