@@ -168,19 +168,6 @@
   background-color: #eee;
 }
 
-.pageFlipping {
-  animation: flipPage 0.6s forwards;
-}
-
-@keyframes flipPage {
-  from {
-    transform: rotateY(0deg);
-  }
-  to {
-    transform: rotateY(180deg);
-  }
-}
-
 .alertTitle {
   font-family: "Courgette", cursive;
 }

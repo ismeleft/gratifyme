@@ -9,7 +9,7 @@ import styles from "./AlertDialog.module.css";
 
 export default function AlertDialog({ open, handleClose, handleConfirm }) {
   return (
-    <React.Fragment>
+    <>
       <Dialog
         open={open}
         onClose={handleClose}
@@ -40,6 +40,6 @@ export default function AlertDialog({ open, handleClose, handleConfirm }) {
           </Button>
         </DialogActions>
       </Dialog>
-    </React.Fragment>
+    </>
   );
 }

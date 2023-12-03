@@ -37,7 +37,6 @@ function EditorInnerComponent({ date, uid, onEditorReady, setIsLoading }) {
     }
 
     async function loadContent() {
-      // setIsLoading(true);
       try {
         const userDiaryRef = doc(
           firebase.db,
@@ -196,17 +195,27 @@ export default function Editor({ date }) {
     setShowDialog(true);
   };
 
+  // const handleSave = () => {
+  //   if (isEditMode) {
+  //     saveToFirebase(content);
+  //   }
+  // };
+
   return (
     <LexicalComposer initialConfig={lexicalEditorConfig}>
       {isLoading && <LoadingOverlay />}
-      <ToggleButton isChecked={isEditMode} onToggle={toggleEditMode} />
+      <ToggleButton
+        isChecked={isEditMode}
+        onToggle={toggleEditMode}
+        // onSave={handleSave}
+      />
       {isEditMode ? (
         <>
           {showAlert && (
             <Stack
               sx={{
                 width: "300px",
-                position: "absolute",
+                position: "fixed",
                 top: "80px",
                 right: "100px",
                 zIndex: 1,
