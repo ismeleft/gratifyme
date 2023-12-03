@@ -23,7 +23,6 @@ export default function convertLexicalNodesToHTML(nodes) {
         return `<p${style}>${childrenHTML}</p>`;
       } else if (node.type === "text") {
         let textHTML = node.text;
-        textHTML = `<p>${textHTML}</p>`;
         // 根據 format 的值來處理粗體和斜體
         if (node.format === 1) {
           textHTML = `<strong>${textHTML}</strong>`;
