@@ -1,8 +1,11 @@
 import React from "react";
 import styles from "./ToggleButton.module.css";
 
-const ToggleButton = ({ isChecked, onToggle }) => {
+const ToggleButton = ({ isChecked, onToggle, onSave }) => {
   const handleToggle = () => {
+    if (isChecked) {
+      onSave();
+    }
     onToggle();
   };
 
