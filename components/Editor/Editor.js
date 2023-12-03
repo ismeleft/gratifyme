@@ -219,6 +219,12 @@ export default function Editor({ date }) {
                 top: "80px",
                 right: "100px",
                 zIndex: 1,
+                "@media (max-width:600px)": {
+                  width: "90%",
+                  top: "80px",
+                  right: "5%",
+                  left: "5%",
+                },
               }}
               spacing={2}
             >

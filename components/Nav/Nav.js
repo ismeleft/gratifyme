@@ -20,7 +20,6 @@ const Nav = () => {
   useEffect(() => {
     // 確保代碼在瀏覽器端執行
     if (typeof window !== "undefined") {
-      // 從 localStorage 獲取用戶名
       const storedUserName = localStorage.getItem("userName");
       //加了console.log就可以順利印出email
       console.log(storedUserName);
@@ -37,9 +36,8 @@ const Nav = () => {
   const handleLogout = async () => {
     try {
       await signOut(auth);
-      // 清除 localStorage 中的用戶名
       localStorage.removeItem("userName");
-      setUserName(""); // 重置 userName 狀態
+      setUserName("");
       router.push("/");
     } catch (error) {
       console.error(error);
