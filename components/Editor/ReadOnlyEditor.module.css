@@ -1,30 +1,28 @@
+/* ./components/ReadOnlyEditor.module.css */
 .readOnlyWrapper {
   margin-top: 30px;
   line-height: 32px;
-  /* 其他樣式 */
 }
 
-.readOnlyWrapper > p {
-  background-image: linear-gradient(to bottom, #00000056 1px, transparent 1px);
-  background-size: 100% 30px;
+.readOnlyWrapper > * {
+  position: relative;
 }
 
-.readOnlyWrapper > ul,
-.readOnlyWrapper > ol {
-  background-image: linear-gradient(to bottom, #00000056 1px, transparent 1px);
-  background-size: 100% 30px;
+.readOnlyWrapper > p::after,
+.readOnlyWrapper > ul::after,
+.readOnlyWrapper > ol::after,
+.readOnlyWrapper > h1::after,
+.readOnlyWrapper > h2::after {
+  content: "";
+  display: block;
+  position: absolute;
+  left: 0;
+  bottom: -1px;
+  width: 100%;
+  height: 1px;
+  background-color: #00000056;
 }
 
-.readOnlyWrapper > h1 {
-  background-image: linear-gradient(to bottom, #00000056 1px, transparent 1px);
-  background-size: 100% 31px;
-}
-.readOnlyWrapper > h2 {
-  background-image: linear-gradient(to bottom, #00000056 1px, transparent 1px);
-  background-size: 100% 30px;
-}
 .readOnlyWrapper > image {
   background-image: none;
 }
-
-/* 如果有其他需要特殊處理的元素，根據類型添加對應的樣式 */
