@@ -24,12 +24,19 @@ const Header = () => {
         Sign up and start your personal journaling experience.
       </div>
       {isLogin ? (
-        <div className={styles.line}>
-          <button onClick={handleGoToDiary}>start your journey</button>
+        <div className={styles.startHint}>
+          <button className={styles.startHintBtn} onClick={handleGoToDiary}>
+            start your journey
+          </button>
         </div>
       ) : (
-        <div className={styles.line}>
-          <button onClick={handleSignupLoginClick}>Join us</button>
+        <div className={styles.startHint}>
+          <button
+            className={styles.startHintBtn}
+            onClick={handleSignupLoginClick}
+          >
+            Join us
+          </button>
         </div>
       )}
     </div>

@@ -1,7 +1,6 @@
 .toggleBtn {
   display: flex;
   align-items: center;
-  cursor: pointer;
 }
 
 .checkbox {
@@ -29,6 +28,7 @@
   background: white;
   border-radius: 50%;
   transition: 0.3s;
+  cursor: pointer;
 }
 
 .checkbox:checked + .slider {

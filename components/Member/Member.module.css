@@ -33,7 +33,19 @@
   border-radius: 5px;
   background-color: rgba(255, 238, 55, 0.543);
 }
+.memberformBtn:active {
+  transform: scale(0.95);
+}
 
+.memberformBtn:hover {
+  background-color: rgba(255, 238, 55);
+}
+
+.signupToLoginHint:hover,
+.loginToSignupHint:hover {
+  cursor: pointer;
+  color: #ff6666;
+}
 .signupTitle,
 .loginTitle,
 .signupHint,

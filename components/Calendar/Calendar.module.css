@@ -9,6 +9,7 @@
   border-radius: 5px;
   padding: 10px;
   color: #555;
+  cursor: pointer;
 }
 
 .editedDate::after {
@@ -20,7 +21,12 @@
   background-size: cover;
   margin: 3px;
 }
-
+.rbc-button-cell:hover {
+  background-color: none;
+}
+.rbc-day-bg {
+  cursor: pointer;
+}
 @media only screen and (max-width: 1200px) {
   .myCalendarWrapper {
     width: 100%;
