@@ -72,7 +72,9 @@
 .googleImage {
   margin: 4px;
 }
-
+.errorMessage {
+  color: #fff;
+}
 @media screen and (max-width: 500px) {
   .memberContainer {
     flex-direction: column;
