@@ -7,6 +7,7 @@ import { useRouter } from "next/router";
 import { collection, getDocs } from "firebase/firestore";
 import firebase from "@/utils/firebase";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { CursorPointer } from "mdi-material-ui";
 
 const localizer = momentLocalizer(moment);
 

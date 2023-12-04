@@ -25,11 +25,18 @@ const Header = () => {
       </div>
       {isLogin ? (
         <div className={styles.startHint}>
-          <button onClick={handleGoToDiary}>start your journey</button>
+          <button className={styles.startHintBtn} onClick={handleGoToDiary}>
+            start your journey
+          </button>
         </div>
       ) : (
         <div className={styles.startHint}>
-          <button onClick={handleSignupLoginClick}>Join us</button>
+          <button
+            className={styles.startHintBtn}
+            onClick={handleSignupLoginClick}
+          >
+            Join us
+          </button>
         </div>
       )}
     </div>
