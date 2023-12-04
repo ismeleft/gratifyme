@@ -73,4 +73,7 @@
   .username {
     display: none;
   }
+  .nav {
+    width: 90%;
+  }
 }
