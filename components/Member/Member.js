@@ -33,9 +33,7 @@ export default function Member() {
       signInWithEmailAndPassword(firebase.auth, email, password)
         .then((userCredential) => {
           const user = userCredential.user;
-          // 儲存到 localStorage
           localStorage.setItem("userName", user.email);
-          // 更新 Context 中的 userName
           setUserName(user.email);
 
           router.push("/");
@@ -135,7 +133,8 @@ export default function Member() {
               Sign up
             </button>
             <p className={styles.signupHint} onClick={toggleForm}>
-              Or you have account? Login
+              Or you have account?{" "}
+              <span className={styles.signupToLoginHint}>Login</span>
             </p>
           </form>
           <div onClick={handleClose} className={styles.closeWindow}>
@@ -184,7 +183,8 @@ export default function Member() {
               Login
             </button>
             <p className={styles.loginHint} onClick={toggleForm}>
-              Do not have account? Sign up
+              Do not have account?{" "}
+              <span className={styles.loginToSignupHint}>Sign up</span>
             </p>
           </form>
           <div onClick={handleClose} className={styles.closeWindow}>

@@ -15,12 +15,13 @@
   margin-top: 40px;
 }
 
-.line {
+.startHint {
   display: flex;
   flex-direction: column;
   margin-top: 20px;
   width: 80%;
 }
+
 @media screen and (max-width: 768px) {
   .header {
     margin-left: 0px;
