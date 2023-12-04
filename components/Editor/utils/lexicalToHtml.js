@@ -17,10 +17,21 @@ export default function convertLexicalNodesToHTML(nodes) {
         const childrenHTML = node.children
           ? convertLexicalNodesToHTML(node.children)
           : "";
-        // 這裡可以根據 format 或 style 來處理段落的對齊方式
-        const style =
-          node.format === "center" ? ' style="text-align: center;"' : "";
-        return `<p${style}>${childrenHTML}</p>`;
+
+        let alignStyle = "";
+        switch (node.format) {
+          case "center":
+            alignStyle = ' style="text-align: center;"';
+            break;
+          case "left":
+            alignStyle = ' style="text-align: left;"';
+            break;
+          case "right":
+            alignStyle = ' style="text-align: right;"';
+            break;
+        }
+
+        return `<p${alignStyle}>${childrenHTML}</p>`;
       } else if (node.type === "text") {
         let textHTML = node.text;
         // 根據 format 的值來處理粗體和斜體
