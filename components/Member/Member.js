@@ -122,12 +122,14 @@ export default function Member() {
               })}
             />
             <br />
-            {registerForm.formState.errors.name && <div>Name is required.</div>}
+            {registerForm.formState.errors.name && (
+              <div className={styles.errorMessage}>Name is required.</div>
+            )}
             {registerForm.formState.errors.email && (
-              <div>Email is required.</div>
+              <div className={styles.errorMessage}>Email is required.</div>
             )}
             {registerForm.formState.errors.password && (
-              <div>Password is required.</div>
+              <div className={styles.errorMessage}>Password is required.</div>
             )}
             <button type="submit" className={styles.memberformBtn}>
               Sign up
@@ -175,9 +177,11 @@ export default function Member() {
               {...loginForm.register("password", { required: true })}
             />
             <br />
-            {loginForm.formState.errors.email && <div>Email is required.</div>}
+            {loginForm.formState.errors.email && (
+              <div className={styles.errorMessage}>Email is required.</div>
+            )}
             {loginForm.formState.errors.password && (
-              <div>Password is required.</div>
+              <div className={styles.errorMessage}>Password is required.</div>
             )}
             <button type="submit" className={styles.memberformBtn}>
               Login
