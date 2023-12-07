@@ -3,7 +3,7 @@ import styles from "./Diaryguide.module.css";
 
 const Diaryguide = () => {
   return (
-    <div className={styles.diaryGuide}>
+    <section className={styles.diaryGuide}>
       <div>
         <p className={styles.diaryGuideTitle}>GratifyME Instructions:</p>
         <p className={styles.diaryGuideText}>
@@ -16,9 +16,7 @@ const Diaryguide = () => {
           Of course, you can also use this tool as a general life record.
         </p>
       </div>
-
-      <br />
-    </div>
+    </section>
   );
 };
 
