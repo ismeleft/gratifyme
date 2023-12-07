@@ -1,7 +1,7 @@
 import { useRouter } from "next/router";
 import React, { useEffect } from "react";
 import Editor from "../../components/Editor/Editor";
-import Nav from "@/components/Nav/Nav";
+// import Nav from "@/components/Nav/Nav";
 import { ThemeProvider } from "@emotion/react";
 import theme from "@/components/Editor/theme/editor";
 import { CssBaseline, Grid, Typography, Box } from "@mui/material";
@@ -13,38 +13,10 @@ export default function CalendarDatePage() {
   const router = useRouter();
   const { date } = router.query;
 
-  // useEffect(() => {
-  //   // 處理程式導航
-  //   const handleRouteChange = (url) => {
-  //     if (
-  //       !window.confirm(
-  //         "Are you sure you want to leave this page? Please remember to save"
-  //       )
-  //     ) {
-  //       throw "routeChange aborted.";
-  //     }
-  //   };
-
-  //   // 處理瀏覽器動作（前進、後退）
-  //   const handleBeforePopState = () => {
-  //     return window.confirm(
-  //       "Are you sure you want to leave this page? Please remember to save"
-  //     );
-  //   };
-
-  //   router.events.on("routeChangeStart", handleRouteChange);
-  //   router.beforePopState(handleBeforePopState);
-
-  //   return () => {
-  //     router.events.off("routeChangeStart", handleRouteChange);
-  //     // beforePopState 不需要解除綁定，因為它僅對當前頁面生效
-  //   };
-  // }, [router]);
-  // 根據日期顯示相應的內容
   return (
     <div className={styles.pageContainer}>
       <div className={styles.editorWrapper}>
-        <Nav className={styles.editorNav} />
+        {/* <Nav className={styles.editorNav} /> */}
         <ThemeProvider theme={theme}>
           <CssBaseline />
           <Grid

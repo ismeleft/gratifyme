@@ -1,10 +1,10 @@
 import styles from "../styles/page.module.css";
-import Nav from "../components/Nav/Nav";
+// import Nav from "../components/Nav/Nav";
 import Header from "../components/Header/Header";
 import Member from "@/components/Member/Member";
 import GratitudeBenefit from "@/components/GratitudeBenefit/GratitudeBenefit";
-import { Footer } from "@/components/Footer/Footer";
 import { useRouter } from "next/router";
+import Image from "next/image";
 
 export default function Home() {
   const router = useRouter();
@@ -14,22 +14,19 @@ export default function Home() {
       <div className={styles.homeLayout}>
         <div className={styles.headerLayout}>
           <Header />
-          <Nav />
         </div>
         {showMember && <Member />}
-        <img
+        <Image
           className={styles.mouseCursor}
-          src="/images/mouse-cursor.png"
+          src={"/images/mouse-cursor.png"}
           alt="mouse-cursor"
-          width={"40px"}
-          height={"40px"}
+          width={40}
+          height={40}
         />
       </div>
-
       <div className={styles.middleLayout}>
         <GratitudeBenefit />
       </div>
-      <Footer />
     </>
   );
 }

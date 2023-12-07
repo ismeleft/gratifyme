@@ -5,3 +5,7 @@
 .dialogButton {
   font-family: "Courgette", cursive;
 }
+
+.alertDialog {
+  transition: all 0.2 ease;
+}
