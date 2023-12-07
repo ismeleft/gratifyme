@@ -1,27 +1,7 @@
 import React from "react";
 import styles from "./GratitudeBenefit.module.css";
 import Image from "next/image";
-
-const GratitudeBenefitData = [
-  {
-    title: "Enhanced Mental Health",
-    photoName: "/gratitudeBenefitIcon/mental-health.png",
-    description:
-      "Writing in a gratitude journal regularly can lead to an increase in positive emotions. This is because focusing on the positive aspects of your life helps to foster a more optimistic outlook. ",
-  },
-  {
-    title: "Improved Sleep Quality",
-    photoName: "/gratitudeBenefitIcon/sleepy.png",
-    description:
-      "Reflecting on grateful moments before bed can promote a sense of calm and contentment, which is conducive to better sleep. ",
-  },
-  {
-    title: "Increased Self-Awareness and Personal Growth",
-    photoName: "/gratitudeBenefitIcon/plant.png",
-    description:
-      "Keeping a gratitude journal encourages self-reflection.  This heightened self-awareness can lead to a deeper understanding of yourself, your values, and what truly makes you happy, thus promoting personal growth.",
-  },
-];
+import { GratitudeBenefitData } from "./GratitudeBenefitData";
 
 const GratitudeBenefit = () => {
   return (
@@ -45,26 +25,23 @@ const GratitudeBenefit = () => {
   );
 };
 
-const GratitudeBenefitItem = (props) => {
+const GratitudeBenefitItem = ({ gratitudeObj }) => {
+  const { photoName, title, description } = gratitudeObj;
   return (
     <li className={styles.gratitudeBenefitItem}>
       <Image
         className={styles.gratitudeBenefitItemImage}
-        src={props.gratitudeObj.photoName}
-        alt={props.gratitudeObj.title}
+        src={photoName}
+        alt={title}
         width={50}
         height={50}
       />
       <div className={styles.gratitudeBenefitItemInfo}>
-        <h3 className={styles.gratitudeBenefitItemTitle}>
-          {props.gratitudeObj.title}
-        </h3>
-        <p className={styles.gratitudeBenefitItemText}>
-          {props.gratitudeObj.description}
-        </p>
+        <h3 className={styles.gratitudeBenefitItemTitle}>{title}</h3>
+        <p className={styles.gratitudeBenefitItemText}>{description}</p>
       </div>
     </li>
   );
 };
 
-export default GratitudeBenefit;
+export default React.memo(GratitudeBenefit);

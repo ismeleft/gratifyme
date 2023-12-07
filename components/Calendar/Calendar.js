@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { Calendar, momentLocalizer } from "react-big-calendar";
 import moment from "moment";
 import "react-big-calendar/lib/css/react-big-calendar.css";
@@ -7,7 +7,6 @@ import { useRouter } from "next/router";
 import { collection, getDocs } from "firebase/firestore";
 import firebase from "@/utils/firebase";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
-import { CursorPointer } from "mdi-material-ui";
 
 const localizer = momentLocalizer(moment);
 
@@ -26,27 +25,26 @@ const MyCalendar = () => {
       }
     });
     return () => unsubscribe();
-  }, []);
+  }, [auth]);
 
-  //抓取已編輯的日記
   const fetchEditedDates = async (uid) => {
-    const diaryEntriesRef = collection(
-      firebase.db,
-      "users",
-      uid,
-      "diaryEntries"
-    );
-
-    //抓取firestore的資料，根據日期抓取資料
-    const querySnapshot = await getDocs(diaryEntriesRef);
-    const dates = {};
-    querySnapshot.forEach((doc) => {
-      const dateString = doc.id.split("T")[0];
-      //把日期加到dates
-      dates[dateString] = true;
-    });
-    //更新狀態重新渲染
-    setIsEditedDate(dates);
+    try {
+      const diaryEntriesRef = collection(
+        firebase.db,
+        "users",
+        uid,
+        "diaryEntries"
+      );
+      const querySnapshot = await getDocs(diaryEntriesRef);
+      const dates = {};
+      querySnapshot.forEach((doc) => {
+        const dateString = doc.id.split("T")[0];
+        dates[dateString] = true;
+      });
+      setIsEditedDate(dates);
+    } catch (error) {
+      console.error("Error fetching edited dates:", error);
+    }
   };
 
   //日記上的標示
@@ -60,15 +58,21 @@ const MyCalendar = () => {
     }
   };
 
-  const handleSlotSelect = (slotInfo) => {
-    const { end } = slotInfo;
-    router.push(`/editor/${end.toISOString()}`);
-  };
+  const handleSlotSelect = useCallback(
+    (slotInfo) => {
+      const { end } = slotInfo;
+      router.push(`/editor/${end.toISOString()}`);
+    },
+    [router]
+  );
 
-  const handleSelect = (info) => {
-    const { end } = info;
-    router.push(`/editor/${end.toISOString()}`);
-  };
+  const handleSelect = useCallback(
+    (info) => {
+      const { end } = info;
+      router.push(`/editor/${end.toISOString()}`);
+    },
+    [router]
+  );
 
   return (
     <div className={styles.myCalendarWrapper}>
@@ -87,4 +91,4 @@ const MyCalendar = () => {
   );
 };
 
-export default MyCalendar;
+export default React.memo(MyCalendar);
