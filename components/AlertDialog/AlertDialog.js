@@ -15,6 +15,7 @@ export default function AlertDialog({ open, handleClose, handleConfirm }) {
         onClose={handleClose}
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
+        className={styles.alertDialog}
       >
         <DialogTitle className={styles.dialogTitle} id="alert-dialog-title">
           {"Are you sure you want to delete?"}

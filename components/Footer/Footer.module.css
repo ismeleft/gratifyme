@@ -8,3 +8,9 @@
 .footerText {
   color: #fff;
 }
+
+.contactIcon {
+  display: flex;
+  gap: 20px;
+  margin-left: 20px;
+}

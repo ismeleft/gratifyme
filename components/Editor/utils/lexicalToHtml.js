@@ -44,7 +44,7 @@ export default function convertLexicalNodesToHTML(nodes) {
         }
         return textHTML;
       } else if (node.type === "image") {
-        return `<figure><img src="${node.src}" width="90%"  alt="${
+        return `<br><figure><img src="${node.src}" width="90%"  alt="${
           node.alt || ""
         }" /></figure>`;
       } else if (node.type === "heading") {

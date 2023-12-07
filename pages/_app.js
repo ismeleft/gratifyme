@@ -1,5 +1,6 @@
 import "../styles/globals.css";
 import Head from "next/head";
+import Layout from "@/components/Layout/Layout";
 import { UserProvider } from "@/hooks/useUser";
 
 function MyApp({ Component, pageProps }) {
@@ -9,7 +10,9 @@ function MyApp({ Component, pageProps }) {
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon.png" />
       </Head>
       <UserProvider>
-        <Component {...pageProps} />
+        <Layout>
+          <Component {...pageProps} />
+        </Layout>
       </UserProvider>
     </>
   );

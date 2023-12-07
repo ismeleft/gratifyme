@@ -8,9 +8,10 @@
   background-color: rgb(98, 146, 98);
 }
 .addSubmit:hover {
-  background-color: rgb(93, 169, 93);
+  background-color: rgb(108, 200, 108);
   color: #fff;
   border-radius: 10px;
+  transition: all 0.2s ease;
 }
 .deleteSubmit {
   margin: 10px 0px;
@@ -21,8 +22,9 @@
 }
 .deleteSubmit:hover {
   border-radius: 10px;
-  background-color: rgb(185, 69, 69);
+  background-color: rgb(204, 74, 74);
   color: #fff;
+  transition: all 0.2s ease;
 }
 .editor-text-bold {
   font-weight: bold;
@@ -86,7 +88,6 @@
   margin-top: 8px;
   margin-bottom: 8px;
   tab-size: 2;
-  /* white-space: pre; */
   overflow-x: auto;
   position: relative;
 }

@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import styles from "./Nav.module.css";
-import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { signOut, getAuth } from "firebase/auth";
@@ -14,11 +13,9 @@ const Nav = () => {
   // 從 useUser 中獲取 userName
   const { userName: userNameFromContext } = useUser();
 
-  // 創建一個本地狀態來存儲 userName
   const [userName, setUserName] = useState(userNameFromContext);
 
   useEffect(() => {
-    // 確保代碼在瀏覽器端執行
     if (typeof window !== "undefined") {
       const storedUserName = localStorage.getItem("userName");
       //加了console.log就可以順利印出email
@@ -26,7 +23,7 @@ const Nav = () => {
       setUserName(storedUserName);
     }
   }, []);
-  // 新增這個 useEffect 來響應 userNameFromContext 的改變
+
   useEffect(() => {
     if (userNameFromContext) {
       setUserName(userNameFromContext);

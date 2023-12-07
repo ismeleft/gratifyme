@@ -25,6 +25,11 @@ import Alert from "@mui/material/Alert";
 import AlertTitle from "@mui/material/AlertTitle";
 import Stack from "@mui/material/Stack";
 import LoadingOverlay from "./utils/LoadingOverlay";
+import Slide from "@mui/material/Slide";
+
+function SlideTransition(props) {
+  return <Slide {...props} direction="left" />;
+}
 
 // 讀取Firestore的資料
 function EditorInnerComponent({ date, uid, onEditorReady, setIsLoading }) {
@@ -228,10 +233,12 @@ export default function Editor({ date }) {
               }}
               spacing={2}
             >
-              <Alert severity="success">
-                <AlertTitle>Success</AlertTitle>
-                Diary saved successfully!
-              </Alert>
+              <Slide direction="left" in={showAlert} mountOnEnter unmountOnExit>
+                <Alert severity="success" className={styles.alert}>
+                  <AlertTitle className={styles.alertTitle}>Success</AlertTitle>
+                  Diary saved successfully!
+                </Alert>
+              </Slide>
             </Stack>
           )}
           <button

@@ -1,5 +1,6 @@
 import React from "react";
 import styles from "./GratitudeBenefit.module.css";
+import Image from "next/image";
 
 const GratitudeBenefitData = [
   {
@@ -47,12 +48,12 @@ const GratitudeBenefit = () => {
 const GratitudeBenefitItem = (props) => {
   return (
     <li className={styles.gratitudeBenefitItem}>
-      <img
+      <Image
         className={styles.gratitudeBenefitItemImage}
         src={props.gratitudeObj.photoName}
         alt={props.gratitudeObj.title}
-        width={"50px"}
-        height={"50px"}
+        width={50}
+        height={50}
       />
       <div className={styles.gratitudeBenefitItemInfo}>
         <h3 className={styles.gratitudeBenefitItemTitle}>
