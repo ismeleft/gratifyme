@@ -1,36 +1,34 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+## About GratifyME
 
-## Getting Started
+A website that allows users to easily record a gratitude diary to improve users' happiness and life satisfaction.
 
-First, run the development server:
+## Demo
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+![website](./public/images/整體操作.gif)
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+https://gratifyme.vercel.app/
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+If you do not use a Google account to log in, you can use the following test account and password.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+account:test@test.com
 
-## Learn More
+password:test012
 
-To learn more about Next.js, take a look at the following resources:
+### Use features
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Switching between editing mode and reading mode.
+![diarypage](./public/images/日記操作.gif)
+![switch mode](./public/images/日記模式切換.gif)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+## Tech Stack
 
-## Deploy on Vercel
+![tech stack.png](./public/images/tech%20stack.png)
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Component Tree
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+![Component Tree.png](./public/images/component-tree.png)
+
+## Contact
+
+Name:陳玟穎 Wen Ying Chen
+Email:leftleft0813@gmail.com

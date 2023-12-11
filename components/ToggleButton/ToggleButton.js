@@ -3,10 +3,10 @@ import styles from "./ToggleButton.module.css";
 
 const ToggleButton = ({ isChecked, onToggle, onSave }) => {
   const handleToggle = () => {
+    onToggle();
     if (isChecked) {
       onSave();
     }
-    onToggle();
   };
 
   return (

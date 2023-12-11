@@ -63,7 +63,6 @@ export default function Member() {
     try {
       const result = await signInWithPopup(firebase.auth, provider);
       const user = result.user;
-      console.log(user);
       localStorage.setItem("userName", user.displayName || user.email);
       setUserName(user.displayName || user.email);
       router.push("/");
