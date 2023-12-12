@@ -22,13 +22,24 @@ Switching between editing mode and reading mode.
 
 ## Tech Stack
 
+This project uses next.js.react as my front-end framework, and uses react-big-calendar and lexical to complete the overall diary function. The database uses firebase services, including Firebase Authentication, Firebase FireStore, and Firebase Storage, and is finally deployed to vercel.
+
 ![tech stack.png](./public/images/tech%20stack.png)
 
 ## Component Tree
+
+I use next.js pages router because it has several benefits.
+
+- File-system Based Routing
+- Dynamic Routing
+- Static Generation and Server-side Rendering
+- Enhanced SEO
+- Easy to Customize
 
 ![Component Tree.png](./public/images/component-tree.png)
 
 ## Contact
 
 Name:陳玟穎 Wen Ying Chen
+
 Email:leftleft0813@gmail.com
