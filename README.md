@@ -4,7 +4,7 @@ A website that allows users to easily record a gratitude diary to improve users'
 
 ## Demo
 
-![website](./public/images/整體操作.gif)
+![website](./public/images/all%20pages.gif)
 
 https://gratifyme.vercel.app/
 
@@ -17,8 +17,8 @@ password:test012
 ### Use features
 
 Switching between editing mode and reading mode.
-![diarypage](./public/images/日記操作.gif)
-![switch mode](./public/images/日記模式切換.gif)
+![diarypage](./public/images/diary.gif)
+![switch mode](./public/images/switch%20mode.gif)
 
 ## Tech Stack
 
