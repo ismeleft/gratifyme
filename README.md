@@ -38,6 +38,12 @@ I use next.js pages router because it has several benefits.
 
 ![Component Tree.png](./public/images/component-tree.png)
 
+## Unit Test
+- Use Jest to test Footer component render
+
+![image](https://github.com/ismeleft/gratifyme/assets/76611330/62b79aae-c106-4323-8f1e-eaa3b0af1ea3)
+
+
 ## Contact
 
 Name:陳玟穎 Wen Ying Chen
