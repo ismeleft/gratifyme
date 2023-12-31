@@ -4,7 +4,7 @@ import Image from "next/image";
 
 export const Footer = () => {
   return (
-    <div className={styles.footerWrapper}>
+    <div className={styles.footerWrapper} role="contentinfo">
       <p className={styles.footerText}>Copyright 2023 @ GratifyME</p>
       <div className={styles.contactIcon}>
         <a href="https://github.com/ismeleft/gratifyme" target="_blank">
