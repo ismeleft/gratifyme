@@ -166,13 +166,14 @@ export default function Member() {
             <input
               type="email"
               placeholder="email"
-              defaultValue=""
+              defaultValue="test@test.com"
               {...loginForm.register("email", { required: true, minLength: 6 })}
             />
             <br />
             <input
               type="password"
               placeholder="password"
+              defaultValue="test012"
               {...loginForm.register("password", { required: true })}
             />
             <br />
