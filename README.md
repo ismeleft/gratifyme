@@ -36,7 +36,8 @@ I use next.js pages router because it has several benefits.
 - Enhanced SEO
 - Easy to Customize
 
-![component structure](https://github.com/ismeleft/gratifyme/assets/76611330/56a0d9e3-caa8-441d-86c5-01a4b439a45b)
+![component tree](https://github.com/ismeleft/gratifyme/assets/76611330/0cd6af13-5778-4506-9b05-9f7a9e73028f)
+
 
 
 ## Unit Test
