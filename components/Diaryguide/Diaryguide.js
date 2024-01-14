@@ -9,11 +9,11 @@ const Diaryguide = () => {
         <p className={styles.diaryGuideText}>
           Please feel comfortable in this space.
           <br />
-          Writing is not absolute,
+          Writing is not mandatory,
           <br />
-          but this tool can help you record.
+          but this tool can assist you in recording.
           <br />
-          Of course, you can also use this tool as a general life record.
+          Of course, you may also use this tool for general life documentation.
         </p>
       </div>
     </section>
