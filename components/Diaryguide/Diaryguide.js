@@ -13,7 +13,7 @@ const Diaryguide = () => {
           <br />
           but this tool can assist you in recording.
           <br />
-          Of course, you may also use this tool for general life documentation.
+          Of course, you may also use this tool for general life record.
         </p>
       </div>
     </section>
