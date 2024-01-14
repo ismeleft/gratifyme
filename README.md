@@ -36,7 +36,8 @@ I use next.js pages router because it has several benefits.
 - Enhanced SEO
 - Easy to Customize
 
-![Component Tree.png](./public/images/component-tree.png)
+![component structure](https://github.com/ismeleft/gratifyme/assets/76611330/56a0d9e3-caa8-441d-86c5-01a4b439a45b)
+
 
 ## Unit Test
 - Use Jest to test Footer component render
