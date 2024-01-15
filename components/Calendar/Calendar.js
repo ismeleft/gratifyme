@@ -4,8 +4,8 @@ import moment from "moment";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 import styles from "./Calendar.module.css";
 import { useRouter } from "next/router";
-import { collection, getDocs } from "firebase/firestore";
 import firebase from "@/utils/firebase";
+import { collection, getDocs } from "firebase/firestore";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 
 const localizer = momentLocalizer(moment);
