@@ -28,13 +28,15 @@ This project uses next.js.react as my front-end framework, and uses react-big-ca
 
 ## Component Tree
 
-I use next.js pages router because it has several benefits.
+In this project, I chose to use next.js's page router, based on several key advantages it brings to my project:
 
-- File-system Based Routing
-- Dynamic Routing
-- Static Generation and Server-side Rendering
-- Enhanced SEO
-- Easy to Customize
+- File-system Based Routing: Simplifies routing management through an intuitive file structure.
+- Dynamic Routing: Offers flexible page routing options to meet various navigation needs.
+- Static Generation and Server-side Rendering: Enhances performance and loading speed, improving user experience.
+- Enhanced SEO: Increases search engine visibility through improved rendering strategies.
+- Easy to Customize: Allows me to easily customize and expand functionality according to project needs.
+
+These features have had a positive impact directly on my project, making it more efficient, reliable, and easy to manage.
 
 ![component tree](https://github.com/ismeleft/gratifyme/assets/76611330/0cd6af13-5778-4506-9b05-9f7a9e73028f)
 
