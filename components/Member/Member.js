@@ -102,39 +102,60 @@ export default function Member() {
               type="text"
               placeholder="name"
               defaultValue=""
-              {...registerForm.register("name", { required: true })}
+              {...registerForm.register("name", {
+                required: "Please enter your name",
+                minLength: {
+                  value: 2,
+                  message: "Name needs to be at least 2 characters",
+                },
+              })}
             />
             <br />
             <input
               type="email"
               placeholder="email"
               defaultValue=""
-              {...registerForm.register("email", { required: true })}
+              {...registerForm.register("email", {
+                required: "Please enter your email",
+                pattern: {
+                  value: /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/,
+                  message: "Please enter a valid email",
+                },
+              })}
             />
             <br />
             <input
               type="password"
               placeholder="password"
               {...registerForm.register("password", {
-                required: true,
-                minLength: 6,
+                required: "Please enter your password",
+                minLength: {
+                  value: 6,
+                  message: "Password needs to be at least 6 characters",
+                },
               })}
             />
             <br />
             {registerForm.formState.errors.name && (
-              <div className={styles.errorMessage}>Name is required.</div>
+              <div className={styles.errorMessage}>
+                {registerForm.formState.errors.name.message}
+              </div>
             )}
             {registerForm.formState.errors.email && (
-              <div className={styles.errorMessage}>Email is required.</div>
+              <div className={styles.errorMessage}>
+                {registerForm.formState.errors.email.message}
+              </div>
             )}
             {registerForm.formState.errors.password && (
-              <div className={styles.errorMessage}>Password is required.</div>
+              <div className={styles.errorMessage}>
+                {registerForm.formState.errors.password.message}
+              </div>
             )}
             <button type="submit" className={styles.memberformBtn}>
               Sign up
             </button>
             <p className={styles.signupHint} onClick={toggleForm}>
-              Or you have account?{" "}
+              Or you have account?
               <span className={styles.signupToLoginHint}>Login</span>
             </p>
           </form>
@@ -167,21 +188,37 @@ export default function Member() {
               type="email"
               placeholder="email"
               defaultValue="test@test.com"
-              {...loginForm.register("email", { required: true, minLength: 6 })}
+              {...loginForm.register("email", {
+                required: "Please enter your email",
+                pattern: {
+                  value: /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/,
+                  message: "Please enter a valid email",
+                },
+              })}
             />
             <br />
             <input
               type="password"
               placeholder="password"
               defaultValue="test012"
-              {...loginForm.register("password", { required: true })}
+              {...loginForm.register("password", {
+                required: "Please enter your password",
+                minLength: {
+                  value: 6,
+                  message: "Password needs to be at least 6 characters",
+                },
+              })}
             />
             <br />
             {loginForm.formState.errors.email && (
-              <div className={styles.errorMessage}>Email is required.</div>
+              <div className={styles.errorMessage}>
+                {loginForm.formState.errors.email.message}
+              </div>
             )}
             {loginForm.formState.errors.password && (
-              <div className={styles.errorMessage}>Password is required.</div>
+              <div className={styles.errorMessage}>
+                {loginForm.formState.errors.password.message}
+              </div>
             )}
             <button type="submit" className={styles.memberformBtn}>
               Login
