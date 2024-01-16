@@ -1,5 +1,5 @@
 import { useForm } from "react-hook-form";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import styles from "../Member/Member.module.css";
 import Image from "next/image";
@@ -12,6 +12,9 @@ import {
   signInWithPopup,
 } from "firebase/auth";
 import { useUser } from "@/hooks/useUser";
+import Alert from "@mui/material/Alert";
+import Snackbar from "@mui/material/Snackbar";
+import { CSSTransition } from "react-transition-group";
 
 export default function Member() {
   const router = useRouter();
@@ -19,6 +22,19 @@ export default function Member() {
   const registerForm = useForm();
   const [showLogin, setShowLogin] = useState(false);
   const { setUserName } = useUser();
+  const [showError, setShowError] = useState(false);
+  const [error, setError] = useState("");
+  const [showSnackbar, setShowSnackbar] = useState(false);
+  const [successMessage, setSuccessMessage] = useState("");
+
+  useEffect(() => {
+    if (showError) {
+      const timer = setTimeout(() => {
+        setShowError(false);
+      }, 3000);
+      return () => clearTimeout(timer);
+    }
+  }, [showError]);
 
   const handleClose = () => {
     router.push("/", undefined, { shallow: true });
@@ -40,7 +56,8 @@ export default function Member() {
         })
         .catch((error) => {
           console.error("Login error:", error);
-          alert(error);
+          setError(error.message);
+          setShowError(true);
         });
     }
   };
@@ -49,11 +66,13 @@ export default function Member() {
     const { email, password } = data;
     createUserWithEmailAndPassword(firebase.auth, email, password)
       .then((userCredential) => {
-        alert("Signup success, please login now!");
+        setSuccessMessage("Signup success, please login now!");
+        setShowSnackbar(true);
       })
       .catch((error) => {
         console.error("Register error:", error);
-        alert(error);
+        setError(error.message);
+        setShowError(true);
       });
   };
 
@@ -67,12 +86,34 @@ export default function Member() {
       setUserName(user.displayName || user.email);
       router.push("/");
     } catch (error) {
-      alert(error);
+      setError(error.message);
+      setShowError(true);
     }
+  };
+
+  const renderErrorAlert = () => (
+    <CSSTransition
+      in={showError}
+      timeout={300}
+      classNames="fadeAlert"
+      unmountOnExit
+    >
+      <Alert severity="error" className={styles.alert}>
+        {error}
+      </Alert>
+    </CSSTransition>
+  );
+
+  const handleCloseSnackbar = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+    setShowSnackbar(false);
   };
 
   return (
     <div className={styles.memberContainer}>
+      {renderErrorAlert()}
       <h1 className={styles.memberpageTitle}>
         Login and enjoy the diary journey!
       </h1>
@@ -233,6 +274,21 @@ export default function Member() {
           </div>
         </div>
       )}
+      <Snackbar
+        open={showSnackbar}
+        autoHideDuration={3000}
+        onClose={handleCloseSnackbar}
+        anchorOrigin={{ vertical: "top", horizontal: "center" }}
+        style={{ top: "50px" }}
+      >
+        <Alert
+          onClose={handleCloseSnackbar}
+          severity="success"
+          sx={{ width: "100%" }}
+        >
+          {successMessage}
+        </Alert>
+      </Snackbar>
     </div>
   );
 }
