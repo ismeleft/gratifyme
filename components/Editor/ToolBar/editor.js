@@ -3,6 +3,7 @@ import pluginsList from "./toolbarIcon";
 import useOnClick from "./useOnClick";
 import { createPortal } from "react-dom";
 import FloatingLinkEditor from "./FloatLinkEditor/editor";
+import { Point } from "lexical";
 
 const Toolbar = () => {
   const { onClick, selectedEventTypes, blockType, isLink, editor, modal } =
@@ -16,6 +17,7 @@ const Toolbar = () => {
         py: 1,
         px: 1,
         borderRadius: "10px 10px 0px 0px",
+        cursor: "pointer",
       }}
       justifyContent="space-between"
     >
@@ -30,7 +32,5 @@ const Toolbar = () => {
     </Grid>
   );
 };
-
-// mdi-material-ui
 
 export default Toolbar;
