@@ -64,7 +64,6 @@ const useOnClick = () => {
       }
     };
 
-    // range selection ( e.g like to bold only the particular area of the text)
     if ($isRangeSelection(selection)) {
       const anchorNode = selection.anchor.getNode();
       const element =
@@ -102,7 +101,6 @@ const useOnClick = () => {
       );
       pushInEventTypesState(selection.hasFormat("code"), eventTypes.formatCode);
 
-      // Update links
       const node = getSelectedNode(selection);
       const parent = node.getParent();
       if ($isLinkNode(parent) || $isLinkNode(node)) {

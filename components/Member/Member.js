@@ -1,5 +1,5 @@
 import { useForm } from "react-hook-form";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import styles from "../Member/Member.module.css";
 import Image from "next/image";
@@ -12,6 +12,9 @@ import {
   signInWithPopup,
 } from "firebase/auth";
 import { useUser } from "@/hooks/useUser";
+import Alert from "@mui/material/Alert";
+import Snackbar from "@mui/material/Snackbar";
+import { CSSTransition } from "react-transition-group";
 
 export default function Member() {
   const router = useRouter();
@@ -19,6 +22,19 @@ export default function Member() {
   const registerForm = useForm();
   const [showLogin, setShowLogin] = useState(false);
   const { setUserName } = useUser();
+  const [showError, setShowError] = useState(false);
+  const [error, setError] = useState("");
+  const [showSnackbar, setShowSnackbar] = useState(false);
+  const [successMessage, setSuccessMessage] = useState("");
+
+  useEffect(() => {
+    if (showError) {
+      const timer = setTimeout(() => {
+        setShowError(false);
+      }, 3000);
+      return () => clearTimeout(timer);
+    }
+  }, [showError]);
 
   const handleClose = () => {
     router.push("/", undefined, { shallow: true });
@@ -40,7 +56,8 @@ export default function Member() {
         })
         .catch((error) => {
           console.error("Login error:", error);
-          alert(error);
+          setError(error.message);
+          setShowError(true);
         });
     }
   };
@@ -49,11 +66,13 @@ export default function Member() {
     const { email, password } = data;
     createUserWithEmailAndPassword(firebase.auth, email, password)
       .then((userCredential) => {
-        alert("Signup success, please login now!");
+        setSuccessMessage("Signup success, please login now!");
+        setShowSnackbar(true);
       })
       .catch((error) => {
         console.error("Register error:", error);
-        alert(error);
+        setError(error.message);
+        setShowError(true);
       });
   };
 
@@ -67,12 +86,34 @@ export default function Member() {
       setUserName(user.displayName || user.email);
       router.push("/");
     } catch (error) {
-      alert(error);
+      setError(error.message);
+      setShowError(true);
     }
+  };
+
+  const renderErrorAlert = () => (
+    <CSSTransition
+      in={showError}
+      timeout={300}
+      classNames="fadeAlert"
+      unmountOnExit
+    >
+      <Alert severity="error" className={styles.alert}>
+        {error}
+      </Alert>
+    </CSSTransition>
+  );
+
+  const handleCloseSnackbar = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+    setShowSnackbar(false);
   };
 
   return (
     <div className={styles.memberContainer}>
+      {renderErrorAlert()}
       <h1 className={styles.memberpageTitle}>
         Login and enjoy the diary journey!
       </h1>
@@ -102,39 +143,60 @@ export default function Member() {
               type="text"
               placeholder="name"
               defaultValue=""
-              {...registerForm.register("name", { required: true })}
+              {...registerForm.register("name", {
+                required: "Please enter your name",
+                minLength: {
+                  value: 2,
+                  message: "Name needs to be at least 2 characters",
+                },
+              })}
             />
             <br />
             <input
               type="email"
               placeholder="email"
               defaultValue=""
-              {...registerForm.register("email", { required: true })}
+              {...registerForm.register("email", {
+                required: "Please enter your email",
+                pattern: {
+                  value: /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/,
+                  message: "Please enter a valid email",
+                },
+              })}
             />
             <br />
             <input
               type="password"
               placeholder="password"
               {...registerForm.register("password", {
-                required: true,
-                minLength: 6,
+                required: "Please enter your password",
+                minLength: {
+                  value: 6,
+                  message: "Password needs to be at least 6 characters",
+                },
               })}
             />
             <br />
             {registerForm.formState.errors.name && (
-              <div className={styles.errorMessage}>Name is required.</div>
+              <div className={styles.errorMessage}>
+                {registerForm.formState.errors.name.message}
+              </div>
             )}
             {registerForm.formState.errors.email && (
-              <div className={styles.errorMessage}>Email is required.</div>
+              <div className={styles.errorMessage}>
+                {registerForm.formState.errors.email.message}
+              </div>
             )}
             {registerForm.formState.errors.password && (
-              <div className={styles.errorMessage}>Password is required.</div>
+              <div className={styles.errorMessage}>
+                {registerForm.formState.errors.password.message}
+              </div>
             )}
             <button type="submit" className={styles.memberformBtn}>
               Sign up
             </button>
             <p className={styles.signupHint} onClick={toggleForm}>
-              Or you have account?{" "}
+              Or you have account?
               <span className={styles.signupToLoginHint}>Login</span>
             </p>
           </form>
@@ -167,21 +229,37 @@ export default function Member() {
               type="email"
               placeholder="email"
               defaultValue="test@test.com"
-              {...loginForm.register("email", { required: true, minLength: 6 })}
+              {...loginForm.register("email", {
+                required: "Please enter your email",
+                pattern: {
+                  value: /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/,
+                  message: "Please enter a valid email",
+                },
+              })}
             />
             <br />
             <input
               type="password"
               placeholder="password"
               defaultValue="test012"
-              {...loginForm.register("password", { required: true })}
+              {...loginForm.register("password", {
+                required: "Please enter your password",
+                minLength: {
+                  value: 6,
+                  message: "Password needs to be at least 6 characters",
+                },
+              })}
             />
             <br />
             {loginForm.formState.errors.email && (
-              <div className={styles.errorMessage}>Email is required.</div>
+              <div className={styles.errorMessage}>
+                {loginForm.formState.errors.email.message}
+              </div>
             )}
             {loginForm.formState.errors.password && (
-              <div className={styles.errorMessage}>Password is required.</div>
+              <div className={styles.errorMessage}>
+                {loginForm.formState.errors.password.message}
+              </div>
             )}
             <button type="submit" className={styles.memberformBtn}>
               Login
@@ -196,6 +274,21 @@ export default function Member() {
           </div>
         </div>
       )}
+      <Snackbar
+        open={showSnackbar}
+        autoHideDuration={3000}
+        onClose={handleCloseSnackbar}
+        anchorOrigin={{ vertical: "top", horizontal: "center" }}
+        style={{ top: "50px" }}
+      >
+        <Alert
+          onClose={handleCloseSnackbar}
+          severity="success"
+          sx={{ width: "100%" }}
+        >
+          {successMessage}
+        </Alert>
+      </Snackbar>
     </div>
   );
 }
